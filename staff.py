@@ -26,3 +26,9 @@ class Staff:
 
     def health_check(self):
         pass
+
+    def add_staff(self, staff):
+        pass
+
+    def remove_staff(self, staff):
+        pass

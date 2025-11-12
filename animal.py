@@ -26,6 +26,24 @@ class Animal:
     def get_dietary(self):
         return self.__dietary
 
+    def add_animals(self):
+        pass
+
+    def remove_animals(self):
+        pass
+
+    def assign_animal(self, animal):
+        pass
+
+    def animal_health(self):
+    #TODO Record health issues such as injuries, illness, or behavioural concerns
+    #TODO Record relevant details including a descriptions of the issue, the date is reported
+    #TODO Record the severity level, any treatment plans or notes
+
+    def health_reports(self):
+    #TODO Record Health reports for individual animals or across the zoo
+    #TODO It should influence zoo operations (e.g animals under treatment should not be moved or displayed)
+
     def __str__(self):
         return "The animal is sleeping"
 

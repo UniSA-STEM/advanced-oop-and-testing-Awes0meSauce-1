@@ -33,5 +33,19 @@ class Enclosure:
     def list_of_animals(self):
         pass
 
+    def add_enclosure(self):
+        pass
+
+    def remove_enclosure(self):
+        pass
+
+    def daily_routines(self):
+        pass
+
+    def generate_report(self):
+    #TODO Generate lists of animals by species
+    #TODO Generate status of enclosures
+
+
     def __str__(self):
         return "The animal is sleeping"
