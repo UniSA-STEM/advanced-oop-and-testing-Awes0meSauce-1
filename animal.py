@@ -6,13 +6,14 @@ ID: 110100110
 Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
-
-class Animal:
+from abc import ABC, abstractmethod
+class Animal(ABC):
     def __init__(self, name, species, age, dietary):
         self.__name = name
         self.__species = species
         self.__age = age
         self.__dietary = dietary
+        self.__animals = []
 
     def get_name(self):
         return self.__name
@@ -26,11 +27,22 @@ class Animal:
     def get_dietary(self):
         return self.__dietary
 
-    def add_animals(self):
+    def get_animals(self):
+        return self.__animals
+
+    @abstractmethod
+    def speak(self):
         pass
 
-    def remove_animals(self):
-        pass
+    def add_animals(self, animal):
+        self.get_animals().append(animal)
+
+    def remove_animals(self, animal):
+        for animal in animal.get_animals():
+            if animal in self.get_animals():
+                self.__animals.append(animal)
+            else:
+                print("Animal is not present in the animals list")
 
     def assign_animal(self, animal):
         pass
@@ -39,10 +51,12 @@ class Animal:
     #TODO Record health issues such as injuries, illness, or behavioural concerns
     #TODO Record relevant details including a descriptions of the issue, the date is reported
     #TODO Record the severity level, any treatment plans or notes
+        pass
 
     def health_reports(self):
     #TODO Record Health reports for individual animals or across the zoo
     #TODO It should influence zoo operations (e.g animals under treatment should not be moved or displayed)
+        pass
 
     def __str__(self):
         return "The animal is sleeping"
@@ -50,12 +64,15 @@ class Animal:
 
 class Mammal(Animal):
     def __init__(self, name, species, age, dietary):
-        super.__init__()
+        super().__init__(name, species, age, dietary)
+
+    def speak(self):
+        return "Bark"
 
 class Reptile(Animal):
     def __init__(self, name, species, age, dietary):
-        super.__init__()
+        super().__init__(name, species, age, dietary)
 
 class Birds(Animal):
     def __init__(self, name, species, age, dietary):
-        super.__init__()
+        super().__init__(name, species, age, dietary)

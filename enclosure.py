@@ -14,6 +14,7 @@ class Enclosure:
         self.__size = size
         self.__environmental_type = environmental_type
         self.__cleanliness = cleanliness
+        self.__enclosures = []
 
     def get_size(self):
         return self.__size
@@ -23,6 +24,9 @@ class Enclosure:
 
     def get_cleanliness(self):
         return self.__cleanliness
+
+    def get_enclosures(self):
+        return self.__enclosures
 
     def check_type(self):
         pass
@@ -34,10 +38,14 @@ class Enclosure:
         pass
 
     def add_enclosure(self):
-        pass
+        self.get_enclosures().append(Enclosure(self.__size, self.__environmental_type, self.__cleanliness))
 
-    def remove_enclosure(self):
-        pass
+    def remove_enclosure(self, enclosure):
+        for enclosure in self.get_enclosures():
+            if enclosure in self.get_enclosures():
+                self.get_enclosures().append(enclosure)
+            else:
+                print("Enclosures is not present in the enclosure list")
 
     def daily_routines(self):
         pass
@@ -45,7 +53,8 @@ class Enclosure:
     def generate_report(self):
     #TODO Generate lists of animals by species
     #TODO Generate status of enclosures
+        pass
 
 
     def __str__(self):
-        return "The animal is sleeping"
+       return "The animal is sleeping"

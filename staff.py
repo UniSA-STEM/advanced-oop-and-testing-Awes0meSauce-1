@@ -32,3 +32,11 @@ class Staff:
 
     def remove_staff(self, staff):
         pass
+
+class Zookeeper(Staff):
+    def __init__(self, role, responsibilities):
+        super().__init__(role, responsibilities)
+
+class Veterinarian(Staff):
+    def __init__(self, role, responsibilities):
+        super().__init__(role, responsibilities)
