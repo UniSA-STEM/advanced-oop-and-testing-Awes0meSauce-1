@@ -16,16 +16,20 @@ class Enclosure:
         self.__cleanliness = cleanliness
         self.__enclosures = []
 
-    def get_size(self):
+    @property
+    def size(self):
         return self.__size
 
-    def get_environmental_type(self):
+    @property
+    def environmental_type(self):
         return self.__environmental_type
 
-    def get_cleanliness(self):
+    @property
+    def cleanliness(self):
         return self.__cleanliness
 
-    def get_enclosures(self):
+    @property
+    def enclosures(self):
         return self.__enclosures
 
     def check_type(self):
@@ -38,12 +42,12 @@ class Enclosure:
         pass
 
     def add_enclosure(self):
-        self.get_enclosures().append(Enclosure(self.__size, self.__environmental_type, self.__cleanliness))
+        self.enclosures.append(Enclosure(self.__size, self.__environmental_type, self.__cleanliness))
 
     def remove_enclosure(self, enclosure):
-        for enclosure in self.get_enclosures():
-            if enclosure in self.get_enclosures():
-                self.get_enclosures().append(enclosure)
+        for enclosure in self.enclosures:
+            if enclosure in self.enclosures:
+                self.enclosures.append(enclosure)
             else:
                 print("Enclosures is not present in the enclosure list")
 

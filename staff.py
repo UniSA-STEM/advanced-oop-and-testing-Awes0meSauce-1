@@ -12,10 +12,12 @@ class Staff:
         self.__role = role
         self.__responsibilities = responsibilities
 
-    def get_role(self):
+    @property
+    def role(self):
         return self.__role
 
-    def get_responsibilities(self):
+    @property
+    def responsibilities(self):
         return self.__responsibilities
 
     def feed_animal(self, animal):
