@@ -48,15 +48,21 @@ class Enclosure(ABC):
     def list_of_animals(self):
         pass
 
-    def add_enclosure(self):
-        self.enclosures.append()
+    def add_enclosure(self, enclosures):
+        if enclosures not in self.enclosures:
+            self.enclosures.append(enclosures)
+            print(f"Added {enclosures.name} into {self.enclosures}")
 
-    def remove_enclosure(self, enclosure):
-        for enclosure in self.enclosures:
-            if enclosure in self.enclosures:
-                self.enclosures.append(enclosure)
-            else:
-                print("Enclosures is not present in the enclosure list")
+        else:
+            print(f"The {enclosures.name} already exists in {self.enclosures}")
+
+    def remove_enclosure(self, enclosures):
+        if enclosures not in self.enclosures:
+            self.enclosures.append(enclosures)
+            print(f"Added {enclosures.name} into {self.enclosures}")
+
+        else:
+            print(f"The {enclosures.name} already exists in {self.enclosures}")
 
     def daily_routines(self):
         pass

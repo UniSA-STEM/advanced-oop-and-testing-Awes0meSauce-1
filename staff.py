@@ -11,6 +11,7 @@ class Staff(ABC):
     def __init__(self, role, responsibilities):
         self.__role = role
         self.__responsibilities = responsibilities
+        self.__staff = []
 
     @property
     def role(self):
@@ -19,6 +20,10 @@ class Staff(ABC):
     @property
     def responsibilities(self):
         return self.__responsibilities
+
+    @property
+    def staff(self):
+        return self.__staff
 
     def feed_animal(self, animal):
         pass
@@ -30,10 +35,20 @@ class Staff(ABC):
         pass
 
     def add_staff(self, staff):
-        pass
+        if staff not in self.staff:
+            self.staff.append(staff)
+            print(f"Added {staff.name} into {self.staff}")
+
+        else:
+            print(f"The {staff.name} already exists in {self.staff}")
 
     def remove_staff(self, staff):
-        pass
+        if staff not in self.staff:
+            self.staff.append(staff)
+            print(f"Added {staff.name} into {self.staff}")
+
+        else:
+            print(f"The {staff.name} already exists in {self.staff}")
 
 class Zookeeper(Staff):
     def __init__(self, role, responsibilities):

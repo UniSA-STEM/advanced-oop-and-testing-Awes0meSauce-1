@@ -7,6 +7,8 @@ Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod
+
+
 class Animal(ABC):
     def __init__(self, name, species, age, dietary):
         self.__name = name
@@ -17,7 +19,7 @@ class Animal(ABC):
 
     def __eq__(self, other):
         if isinstance(other, Animal):
-           return (self.name, self.species) == (other.name, other.species)
+            return (self.name, self.species) == (other.name, other.species)
         return False
 
     @property
@@ -41,27 +43,33 @@ class Animal(ABC):
         return self.__animals
 
     def add_animals(self, animal):
-        self.animals.append(animal)
+        if animal not in self.animals:
+            self.animals.append(animal)
+            print(f"Added {animal.name} into {self.animals}")
+
+        else:
+            print(f"The {animal.name} already exists in {self.animals}")
 
     def remove_animals(self, animal):
-        for animal in animal.get_animals():
-            if animal in self.animals:
-                self.__animals.append(animal)
-            else:
-                print("Animal is not present in the animals list")
+        if animal not in self.animals:
+            self.animals.append(animal)
+            print(f"Added {animal.name} into {self.animals}")
+
+        else:
+            print(f"The {animal.name} already exists in {self.animals}")
 
     def assign_animal(self, animal):
         pass
 
     def animal_health(self):
-    #TODO Record health issues such as injuries, illness, or behavioural concerns
-    #TODO Record relevant details including a descriptions of the issue, the date is reported
-    #TODO Record the severity level, any treatment plans or notes
+        #TODO Record health issues such as injuries, illness, or behavioural concerns
+        #TODO Record relevant details including a descriptions of the issue, the date is reported
+        #TODO Record the severity level, any treatment plans or notes
         pass
 
     def health_reports(self):
-    #TODO Record Health reports for individual animals or across the zoo
-    #TODO It should influence zoo operations (e.g animals under treatment should not be moved or displayed)
+        #TODO Record Health reports for individual animals or across the zoo
+        #TODO It should influence zoo operations (e.g animals under treatment should not be moved or displayed)
         pass
 
     @abstractmethod
@@ -93,6 +101,7 @@ class Mammal(Animal):
     def sleep(self):
         return "The Mammal is sleeping"
 
+
 class Reptile(Animal):
     def __init__(self, name, species, age, dietary):
         super().__init__(name, species, age, dietary)
@@ -105,6 +114,7 @@ class Reptile(Animal):
 
     def sleep(self):
         return "The Reptile is sleeping"
+
 
 class Birds(Animal):
     def __init__(self, name, species, age, dietary):
