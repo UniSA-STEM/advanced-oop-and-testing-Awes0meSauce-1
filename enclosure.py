@@ -8,13 +8,16 @@ This is my own work as defined by the University's Academic Integrity Policy.
 """
 from animal import Animal
 
+from abc import ABC, abstractmethod
 
-class Enclosure:
+
+class Enclosure(ABC):
     def __init__(self, size, environmental_type, cleanliness):
         self.__size = size
         self.__environmental_type = environmental_type
         self.__cleanliness = cleanliness
         self.__enclosures = []
+
 
     @property
     def size(self):
@@ -32,8 +35,12 @@ class Enclosure:
     def enclosures(self):
         return self.__enclosures
 
-    def check_type(self):
-        pass
+    def check_type(self, animal: Animal):
+        if animal not in self.enclosures:
+           self.enclosures.append(animal)
+           print(f"{animal.name} has joined {self.environmental_type}")
+        else:
+            print(f"{animal.name} has already joined {self.environmental_type}")
 
     def current_status(self):
         pass
@@ -42,7 +49,7 @@ class Enclosure:
         pass
 
     def add_enclosure(self):
-        self.enclosures.append(Enclosure(self.__size, self.__environmental_type, self.__cleanliness))
+        self.enclosures.append()
 
     def remove_enclosure(self, enclosure):
         for enclosure in self.enclosures:
@@ -55,10 +62,18 @@ class Enclosure:
         pass
 
     def generate_report(self):
-    #TODO Generate lists of animals by species
-    #TODO Generate status of enclosures
+        #TODO Generate lists of animals by species
+        #TODO Generate status of enclosures
         pass
 
-
     def __str__(self):
-       return "The animal is sleeping"
+        return f"The animal is sleeping, {self.enclosures}"
+
+class Aquatic(Enclosure):
+      def __init__(self, size, environmental_type, cleanliness):
+          super().__init__(size, environmental_type, cleanliness)
+
+
+class Savanna(Enclosure):
+      def __init__(self, size, environmental_type, cleanliness):
+          super().__init__(size, environmental_type, cleanliness)

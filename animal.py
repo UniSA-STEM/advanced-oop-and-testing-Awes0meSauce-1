@@ -15,6 +15,11 @@ class Animal(ABC):
         self.__dietary = dietary
         self.__animals = []
 
+    def __eq__(self, other):
+        if isinstance(other, Animal):
+           return (self.name, self.species) == (other.name, other.species)
+        return False
+
     @property
     def name(self):
         return self.__name

@@ -14,7 +14,10 @@ enclosure1 = Enclosure(1, "Aquatic", "Clean")
 print(enclosure1)
 
 
-mammal1 = Mammal("Mammal", "Mammal", 1, enclosure1)
+mammal1 = Mammal("Mammal", "Mammal", 1, "Meat")
 print(mammal1)
-print(mammal1.speak())
+print(enclosure1.check_type(Mammal("Mammal", "Mammal", 1, "Meat")))
+print(enclosure1)
+print(enclosure1.check_type(Mammal("Mammal", "Mammal", 1, "Meat")))
+print(enclosure1)
 

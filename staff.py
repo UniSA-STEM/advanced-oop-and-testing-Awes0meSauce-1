@@ -6,8 +6,8 @@ ID: 110100110
 Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
-
-class Staff:
+from abc import ABC, abstractmethod
+class Staff(ABC):
     def __init__(self, role, responsibilities):
         self.__role = role
         self.__responsibilities = responsibilities
