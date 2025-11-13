@@ -7,6 +7,12 @@ Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod
+
+import animal
+from animal import Animal
+from enclosure import Enclosure
+
+
 class Staff(ABC):
     def __init__(self, role, responsibilities):
         self.__role = role
@@ -25,14 +31,29 @@ class Staff(ABC):
     def staff(self):
         return self.__staff
 
-    def feed_animal(self, animal):
-        pass
+    def feed_animal(self, animals: Animal):
+        if animals.feed is False:
+           print(f" The {animals.name} has been feed")
+           animals.feed = True
+        else:
+            print(f" The {animals.name} has already been feed")
 
-    def clean_enclosure(self):
-        pass
 
-    def health_check(self):
-        pass
+    def clean_enclosure(self, enclosure: Enclosure):
+        if enclosure.cleanliness is False:
+           print(f" The {enclosure.cleanliness} has been cleaned")
+           enclosure.cleanliness = True
+        else:
+            print(f" The {enclosure.cleanliness} has already been cleaned")
+
+    def health_check(self, animals: Animal):
+        if not animals.health:
+           print(f"The {animals.name} is healthy now")
+           animals.health = True
+        else:
+            print(f"The {animals.name} is already healthy")
+
+
 
     def add_staff(self, staff):
         if staff not in self.staff:

@@ -12,7 +12,7 @@ from abc import ABC, abstractmethod
 
 
 class Enclosure(ABC):
-    def __init__(self, size, environmental_type, cleanliness):
+    def __init__(self, size, environmental_type, cleanliness=False):
         self.__size = size
         self.__environmental_type = environmental_type
         self.__cleanliness = cleanliness
@@ -34,6 +34,10 @@ class Enclosure(ABC):
     @property
     def enclosures(self):
         return self.__enclosures
+
+    @cleanliness.setter
+    def cleanliness(self, value):
+        self.__cleanliness = value
 
     def check_type(self, animal: Animal):
         if animal not in self.enclosures:

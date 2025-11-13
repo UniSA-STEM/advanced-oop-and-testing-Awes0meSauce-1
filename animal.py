@@ -16,6 +16,9 @@ class Animal(ABC):
         self.__age = age
         self.__dietary = dietary
         self.__animals = []
+        self.__feed = False
+        self.__health = False
+
 
     def __eq__(self, other):
         if isinstance(other, Animal):
@@ -41,6 +44,17 @@ class Animal(ABC):
     @property
     def animals(self):
         return self.__animals
+
+    @property
+    def feed(self):
+        return self.__feed
+
+    @feed.setter
+    def feed(self, value):
+        self.__feed = value
+
+    def health(self):
+        return self.__health
 
     def add_animals(self, animal):
         if animal not in self.animals:
@@ -86,7 +100,6 @@ class Animal(ABC):
 
     def __str__(self):
         return "The animal is sleeping"
-
 
 class Mammal(Animal):
     def __init__(self, name, species, age, dietary):

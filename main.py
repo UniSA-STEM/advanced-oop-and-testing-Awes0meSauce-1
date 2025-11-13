@@ -9,6 +9,7 @@ This is my own work as defined by the University's Academic Integrity Policy.
 
 from enclosure import Enclosure
 from animal import Animal, Mammal
+from staff import Staff
 
 enclosure1 = Enclosure(1, "Aquatic", "Clean")
 print(enclosure1)
@@ -20,4 +21,7 @@ print(enclosure1.check_type(Mammal("Mammal", "Mammal", 1, "Meat")))
 print(enclosure1)
 print(enclosure1.check_type(Mammal("Mammal", "Mammal", 1, "Meat")))
 print(enclosure1)
+
+staff1 = Staff("Staff", "Staff")
+print(staff1.feed_animal(Mammal("Mammal", "Mammal", 1, "Meat")))
 
