@@ -106,13 +106,13 @@ class Mammal(Animal):
         super().__init__(name, species, age, dietary)
 
     def speak(self):
-        return "Bark"
+        return f"The {self.species} has spoken"
 
     def eat(self):
-        return "The Mammal is eating"
+        return f"The {self.species} has ate"
 
     def sleep(self):
-        return "The Mammal is sleeping"
+        return f"The {self.species} is sleeping"
 
 
 class Reptile(Animal):
@@ -120,13 +120,13 @@ class Reptile(Animal):
         super().__init__(name, species, age, dietary)
 
     def speak(self):
-        return "The Reptile has spoken"
+        return f"The {self.species} has spoken"
 
     def eat(self):
-        return "The Reptile has ate"
+        return f"The {self.species} has ate"
 
     def sleep(self):
-        return "The Reptile is sleeping"
+        return f"The {self.species} is sleeping"
 
 
 class Birds(Animal):
@@ -134,10 +134,10 @@ class Birds(Animal):
         super().__init__(name, species, age, dietary)
 
     def speak(self):
-        return "The Birds has spoken"
+        return f"The {self.species} has spoken"
 
     def eat(self):
-        return "The Birds has ate"
+        return f"The {self.species} has spoken"
 
     def sleep(self):
-        return "The Birds is sleeping"
+        return f"The {self.species} has spoken"
