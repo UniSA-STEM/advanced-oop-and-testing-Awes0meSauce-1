@@ -31,30 +31,6 @@ class Staff(ABC):
     def staff(self):
         return self.__staff
 
-    def feed_animal(self, animals: Animal):
-        if animals.feed is False:
-           print(f" The {animals.name} has been feed")
-           animals.feed = True
-        else:
-            print(f" The {animals.name} has already been feed")
-
-
-    def clean_enclosure(self, enclosure: Enclosure):
-        if enclosure.cleanliness is False:
-           print(f" The {enclosure.cleanliness} has been cleaned")
-           enclosure.cleanliness = True
-        else:
-            print(f" The {enclosure.cleanliness} has already been cleaned")
-
-    def health_check(self, animals: Animal):
-        if not animals.health:
-           print(f"The {animals.name} is healthy now")
-           animals.health = True
-        else:
-            print(f"The {animals.name} is already healthy")
-
-
-
     def add_staff(self, staff):
         if staff not in self.staff:
             self.staff.append(staff)
@@ -75,6 +51,28 @@ class Zookeeper(Staff):
     def __init__(self, role, responsibilities):
         super().__init__(role, responsibilities)
 
+    def feed_animal(self, animals: Animal):
+        if animals.feed is False:
+           print(f" The {animals.name} has been feed")
+           animals.feed = True
+        else:
+            print(f" The {animals.name} has already been feed")
+
+    def clean_enclosure(self, enclosure: Enclosure):
+        if enclosure.cleanliness is False:
+           print(f" The {enclosure.cleanliness} has been cleaned")
+           enclosure.cleanliness = True
+        else:
+            print(f" The {enclosure.cleanliness} has already been cleaned")
+
 class Veterinarian(Staff):
     def __init__(self, role, responsibilities):
         super().__init__(role, responsibilities)
+
+    def health_check(self, animals: Animal):
+        if not animals.health:
+           print(f"The {animals.name} is healthy now")
+           animals.health = True
+        else:
+            print(f"The {animals.name} is already healthy")
+
