@@ -6,7 +6,10 @@ ID: 110100110
 Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
-from animal import Animal
+import animal
+from animal import Animal, Mammal
+test = Mammal("test", "test", "test", "test")
+a = Mammal("a", "a", "a", "a")
 
 from abc import ABC, abstractmethod
 
@@ -17,6 +20,7 @@ class Enclosure(ABC):
         self.__environmental_type = environmental_type
         self.__cleanliness = cleanliness
         self.__enclosures = []
+
 
 
     @property
@@ -50,7 +54,12 @@ class Enclosure(ABC):
         pass
 
     def list_of_animals(self):
-        pass
+        if not test.animals:
+           return "There are no animals in this environment"
+        else:
+             for an in test.animals:
+                 print(an.animal_name)
+             return None
 
     def add_enclosure(self, enclosures):
         if enclosures not in self.enclosures:
@@ -72,10 +81,7 @@ class Enclosure(ABC):
         pass
 
     def generate_report(self):
-        #TODO Generate lists of animals by species
-        #TODO Generate status of enclosures
-        pass
-
+        return f"The enclosures in the zoo are {self.enclosures} \nThe environmental types are {self.environmental_type} \nThe cleanliness are {self.cleanliness} \nThe animals are {self.list_of_animals()}"
     def __str__(self):
         return f"The animal is sleeping, {self.enclosures}"
 

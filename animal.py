@@ -16,9 +16,9 @@ class Animal(ABC):
         self.__age = age
         self.__dietary = dietary
         self.__animals = []
+        self.__health_record = []
         self.__feed = False
         self.__health = False
-
 
     def __eq__(self, other):
         if isinstance(other, Animal):
@@ -52,6 +52,9 @@ class Animal(ABC):
     @feed.setter
     def feed(self, value):
         self.__feed = value
+    @property
+    def health_record(self):
+        return self.__health_record
 
     def health(self):
         return self.__health
@@ -75,15 +78,13 @@ class Animal(ABC):
     def assign_animal(self, animal):
         pass
 
-    def animal_health(self):
-        #TODO Record health issues such as injuries, illness, or behavioural concerns
-        #TODO Record relevant details including a descriptions of the issue, the date is reported
-        #TODO Record the severity level, any treatment plans or notes
-        pass
+    def animal_health(self, severity, notes, behavioural_concerns, date):
+        return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}"
+
 
     def health_reports(self):
-        #TODO Record Health reports for individual animals or across the zoo
-        #TODO It should influence zoo operations (e.g animals under treatment should not be moved or displayed)
+        # TODO Record Health reports for individual animals or across the zoo
+        # TODO It should influence zoo operations (e.g animals under treatment should not be moved or displayed)
         pass
 
     @abstractmethod
@@ -100,6 +101,7 @@ class Animal(ABC):
 
     def __str__(self):
         return "The animal is sleeping"
+
 
 class Mammal(Animal):
     def __init__(self, name, species, age, dietary):
