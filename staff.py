@@ -68,8 +68,6 @@ class Staff(ABC):
     def staff_id(self, value):
         self.__staff_id = value
 
-
-
     def add_staff(self):
         staff_record = [self.id, self.name, self.age, self.role, self.responsibilities]
 

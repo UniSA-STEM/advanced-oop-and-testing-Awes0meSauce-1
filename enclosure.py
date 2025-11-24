@@ -13,7 +13,13 @@ from abc import ABC, abstractmethod
 
 
 class Enclosure(ABC):
+    __next_id = 1
+    __total_records = []
     def __init__(self, name, size, environmental_type, cleanliness=False):
+        self.__total_records = Enclosure.__total_records
+        self.__id = Enclosure.__next_id
+        Enclosure.__next_id += 1
+
         self.__name = name
         self.__size = size
         self.__environmental_type = environmental_type
@@ -22,6 +28,14 @@ class Enclosure(ABC):
         self.__enclosures = []
         self.__animal_enclosure_id = 1
         self.__enclosure_id = 1
+
+    @property
+    def id(self):
+        return self.__id
+
+    @property
+    def total_records(self):
+        return self.__total_records
 
     @property
     def name(self):
@@ -88,7 +102,7 @@ class Enclosure(ABC):
     def assign_enclosure(self, animal: Animal):
         animal_enclosure_record = self.animal_enclosure_id, animal.name, animal.species, animal.age, animal.dietary
         self.animal_enclosures.append(animal_enclosure_record)
-        print(f"Added {animal_enclosure_record} \n Enclosure record: {self.animal_enclosures}")
+        print(f"The Enclosure is {self.name}, it has added {animal_enclosure_record} \nEnclosure {self.name} record: {self.animal_enclosures}")
         self.animal_enclosure_id += 1
 
     def design_enclosure(self, id):
@@ -105,11 +119,10 @@ class Enclosure(ABC):
     def daily_routines(self):
         pass
 
+    @abstractmethod
     def generate_report(self):
-        enclosure_record = self.enclosure_id, self.name, self.size, self.environmental_type, self.cleanliness
-        self.enclosures.append(enclosure_record)
-        print(f"Added {enclosure_record} \nEnclosure record: {self.enclosures}")
-        self.animal_enclosure_id += 1
+        pass
+
     def __str__(self):
         return f"The animal is sleeping, {self.enclosures}"
 
@@ -117,7 +130,19 @@ class Aquatic(Enclosure):
       def __init__(self, name, size, environmental_type, cleanliness):
           super().__init__(name, size, environmental_type, cleanliness)
 
+      def generate_report(self):
+          enclosure_record = self.id, self.name, self.size, self.environmental_type, self.cleanliness
+          self.total_records.append(enclosure_record)
+          print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}")
+          return enclosure_record
+
 
 class Savanna(Enclosure):
       def __init__(self, name, size, environmental_type, cleanliness):
           super().__init__(name, size, environmental_type, cleanliness)
+
+      def generate_report(self):
+          enclosure_record = self.id, self.name, self.size, self.environmental_type, self.cleanliness
+          self.total_records.append(enclosure_record)
+          print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}")
+          return enclosure_record
