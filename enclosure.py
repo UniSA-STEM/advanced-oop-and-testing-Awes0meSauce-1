@@ -8,8 +8,6 @@ This is my own work as defined by the University's Academic Integrity Policy.
 """
 import animal
 from animal import Animal, Mammal
-test = Mammal("test", "test", "test", "test")
-a = Mammal("a", "a", "a", "a")
 
 from abc import ABC, abstractmethod
 
@@ -20,8 +18,7 @@ class Enclosure(ABC):
         self.__environmental_type = environmental_type
         self.__cleanliness = cleanliness
         self.__enclosures = []
-
-
+        self.__enclosure_id = 1
 
     @property
     def size(self):
@@ -43,6 +40,10 @@ class Enclosure(ABC):
     def cleanliness(self, value):
         self.__cleanliness = value
 
+    @property
+    def enclosure_id(self):
+        return self.__enclosure_id
+
     def check_type(self, animal: Animal):
         if animal not in self.enclosures:
            self.enclosures.append(animal)
@@ -61,29 +62,35 @@ class Enclosure(ABC):
                  print(an.animal_name)
              return None
 
-    def add_enclosure(self, enclosures):
-        if enclosures not in self.enclosures:
-            self.enclosures.append(enclosures)
-            print(f"Added {enclosures.name} into {self.enclosures}")
+    def add_enclosure(self, animal: Animal):
+        enclosure_record = self.enclosure_id, animal.name, animal.species, animal.age, animal.dietary
+        self.enclosures.append(enclosure_record)
+        print(f"Added {enclosure_record} \n Enclosure record: {self.enclosures}")
+        self.enclosure_id += 1
 
-        else:
-            print(f"The {enclosures.name} already exists in {self.enclosures}")
+    def remove_enclosure(self, id):
+        for enclosure_record in self.enclosures:
+            if enclosure_record[0] == id:
+                self.enclosures.remove(enclosure_record)
+                print(f"Removed {enclosure_record} \nUpdated list: {self.enclosures}")
+                return self.enclosures
 
-    def remove_enclosure(self, enclosures):
-        if enclosures not in self.enclosures:
-            self.enclosures.append(enclosures)
-            print(f"Added {enclosures.name} into {self.enclosures}")
+        print("The Enclosure record does not exist")
 
-        else:
-            print(f"The {enclosures.name} already exists in {self.enclosures}")
+        return None
 
     def daily_routines(self):
         pass
 
     def generate_report(self):
-        return f"The enclosures in the zoo are {self.enclosures} \nThe environmental types are {self.environmental_type} \nThe cleanliness are {self.cleanliness} \nThe animals are {self.list_of_animals()}"
+        return f"The enclosures in the zoo are {self.enclosures} \nThe environmental types are {self.environmental_type} \nThe cleanliness are {self.cleanliness} \nThe animals are"
     def __str__(self):
         return f"The animal is sleeping, {self.enclosures}"
+
+    @enclosure_id.setter
+    def enclosure_id(self, value):
+        self._enclosure_id = value
+
 
 class Aquatic(Enclosure):
       def __init__(self, size, environmental_type, cleanliness):

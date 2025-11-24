@@ -7,28 +7,22 @@ Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
 
-from enclosure import Enclosure
+from enclosure import Enclosure, Aquatic, Savanna
 from animal import Animal, Mammal
 from staff import Staff, Zookeeper
 
-enclosure1 = Enclosure(1, "Aquatic", "Clean")
-print(enclosure1)
+savannah = Savanna(1, "Savanna", "Clean")
 
-
-mammal1 = Mammal("Mammal", "Mammal", 1, "Meat")
-print(mammal1)
-print(enclosure1.check_type(Mammal("Mammal", "Mammal", 1, "Meat")))
-print(enclosure1)
-print(enclosure1.check_type(Mammal("Mammal", "Mammal", 1, "Meat")))
-print(enclosure1)
+leo = Mammal("Leo", "Lion", 6, "Meat")
+savannah.add_enclosure(leo)
+print(leo)
 
 zookeeper1 = Zookeeper()
 zookeeper1.add_staff("Jim", 21, "Zookeeper", "Feeds Animals and Cleans the Enclosures" )
 
-mammal1.add_animals(mammal1)
-print(enclosure1.list_of_animals())
-print(enclosure1.generate_report())
-print(mammal1.animal_health("Light", "There is a slight bruise on the right arm.", "There are no behavioural concerns", "9th of November"))
+savannah.generate_report()
+leo.animal_total_health("Light", "There is a slight bruise on the right arm.", "There are no behavioural concerns", "9th of November")
+print(savannah)
 zookeeper1.add_health_record("a", "a", "a", "a")
 zookeeper1.add_health_record("b", "b", "b", "b")
 zookeeper1.remove_health_record(1)

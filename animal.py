@@ -16,8 +16,10 @@ class Animal(ABC):
         self.__age = age
         self.__dietary = dietary
         self.__animals = []
+        self.__animal_health = []
         self.__feed = False
         self.__health = False
+        self.__animal_id = 1
 
     def __eq__(self, other):
         if isinstance(other, Animal):
@@ -52,31 +54,42 @@ class Animal(ABC):
     def feed(self, value):
         self.__feed = value
 
+    @property
+    def animal_health(self):
+        return self.__animal_health
+
+    @property
+    def animal_id(self):
+        return self.__animal_id
+
     def health(self):
         return self.__health
-
-    def add_animals(self, animal):
-        if animal not in self.animals:
-            self.animals.append(animal)
-            print(f"Added {animal.name} into {self.animals}")
-
-        else:
-            print(f"The {animal.name} already exists in {self.animals}")
-
-    def remove_animals(self, animal):
-        if animal not in self.animals:
-            self.animals.append(animal)
-            print(f"Added {animal.name} into {self.animals}")
-
-        else:
-            print(f"The {animal.name} already exists in {self.animals}")
 
     def assign_animal(self, animal):
         pass
 
-    def animal_health(self, severity, notes, behavioural_concerns, date):
+    def animal_total_health(self, severity, notes, behavioural_concerns, date):
+        animal_record = [self.animal_id, severity, notes, behavioural_concerns, date]
+        self.animal_health.append(animal_record)
+        print(f"Added {animal_record} \n Staff record: {self.animal_health}")
+        self.animal_id += 1
         return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}"
 
+    def add_animals(self, animal):
+        if animal not in animal.animals:
+            animal.animals.append(animal)
+            print(f"Added {animal.name} into {animal.animals}")
+
+        else:
+            print(f"The {animal.name} already exists in {animal.animals}")
+
+    def remove_animals(self, animal):
+        if animal not in animal.animals:
+            animal.animals.append(animal)
+            print(f"Added {animal.name} into {animal.animals}")
+
+        else:
+            print(f"The {animal.name} already exists in {animal.animals}")
 
     def health_reports(self):
         # TODO Record Health reports for individual animals or across the zoo
@@ -96,7 +109,11 @@ class Animal(ABC):
         pass
 
     def __str__(self):
-        return "The animal is sleeping"
+        return f"The current health for all the animals in the zoo is {self.animal_health}\n The animals are {self.animals} "
+
+    @animal_id.setter
+    def animal_id(self, value):
+        self._animal_id = value
 
 
 class Mammal(Animal):
@@ -111,6 +128,10 @@ class Mammal(Animal):
 
     def sleep(self):
         return f"The {self.species} is sleeping"
+
+    def __str__(self):
+        parent_str = super().__str__()
+        return parent_str
 
 
 class Reptile(Animal):
