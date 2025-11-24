@@ -16,7 +16,6 @@ class Animal(ABC):
         self.__age = age
         self.__dietary = dietary
         self.__animals = []
-        self.__health_record = []
         self.__feed = False
         self.__health = False
 
@@ -52,6 +51,7 @@ class Animal(ABC):
     @feed.setter
     def feed(self, value):
         self.__feed = value
+
     @property
     def health_record(self):
         return self.__health_record

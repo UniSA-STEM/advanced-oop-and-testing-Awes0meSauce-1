@@ -18,6 +18,8 @@ class Staff(ABC):
         self.__role = role
         self.__responsibilities = responsibilities
         self.__staff = []
+        self.__health_record = []
+        self.__id = 1
 
     @property
     def role(self):
@@ -30,6 +32,22 @@ class Staff(ABC):
     @property
     def staff(self):
         return self.__staff
+
+    @property
+    def health_record(self):
+        return self.__health_record
+
+    @health_record.setter
+    def health_record(self, value):
+        self.__health_record = value
+
+    @property
+    def id(self):
+        return self.__id
+
+    @id.setter
+    def id(self, value):
+        self.__id = value
 
     def add_staff(self, staff):
         if staff not in self.staff:
@@ -64,6 +82,25 @@ class Zookeeper(Staff):
            enclosure.cleanliness = True
         else:
             print(f" The {enclosure.cleanliness} has already been cleaned")
+
+    def add_health_record(self, description, severity, notified, treatment_plan):
+
+        health_record = [self.id, description, severity, notified, treatment_plan]
+
+        self.health_record.append(health_record)
+        print(f"Added {health_record} \n self.health_record: {self.health_record}")
+
+        self.id += 1
+
+    def remove_health_record(self, id):
+        for record in self.health_record:
+            if record[0] == id:
+               self.health_record.remove(record)
+               print(f"Removed {record} \nUpdated list: {self.health_record}")
+               return
+
+        print("The health_record does not exist")
+
 
 class Veterinarian(Staff):
     def __init__(self, role, responsibilities):
