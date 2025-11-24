@@ -22,9 +22,8 @@ print(enclosure1)
 print(enclosure1.check_type(Mammal("Mammal", "Mammal", 1, "Meat")))
 print(enclosure1)
 
-staff1 = Staff("Staff", "Staff")
-zookeeper1 = Zookeeper("Zookeeper", "Zookeeper")
-print(zookeeper1.feed_animal(Mammal("Mammal", "Mammal", 1, "Meat")))
+zookeeper1 = Zookeeper()
+zookeeper1.add_staff("Jim", 21, "Zookeeper", "Feeds Animals and Cleans the Enclosures" )
 
 mammal1.add_animals(mammal1)
 print(enclosure1.list_of_animals())

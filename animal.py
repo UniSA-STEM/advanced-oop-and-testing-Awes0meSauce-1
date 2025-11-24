@@ -52,10 +52,6 @@ class Animal(ABC):
     def feed(self, value):
         self.__feed = value
 
-    @property
-    def health_record(self):
-        return self.__health_record
-
     def health(self):
         return self.__health
 

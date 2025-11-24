@@ -14,24 +14,15 @@ from enclosure import Enclosure
 
 
 class Staff(ABC):
-    def __init__(self, role, responsibilities):
-        self.__role = role
-        self.__responsibilities = responsibilities
-        self.__staff = []
+    def __init__(self):
+        self.__staff_record = []
         self.__health_record = []
         self.__id = 1
+        self.__staff_id = 1
 
     @property
-    def role(self):
-        return self.__role
-
-    @property
-    def responsibilities(self):
-        return self.__responsibilities
-
-    @property
-    def staff(self):
-        return self.__staff
+    def staff_record(self):
+        return self.__staff_record
 
     @property
     def health_record(self):
@@ -49,25 +40,40 @@ class Staff(ABC):
     def id(self, value):
         self.__id = value
 
-    def add_staff(self, staff):
-        if staff not in self.staff:
-            self.staff.append(staff)
-            print(f"Added {staff.name} into {self.staff}")
+    @property
+    def staff_id(self):
+        return self.__staff_id
 
-        else:
-            print(f"The {staff.name} already exists in {self.staff}")
+    @staff_id.setter
+    def staff_id(self, value):
+        self.__staff_id = value
 
-    def remove_staff(self, staff):
-        if staff not in self.staff:
-            self.staff.append(staff)
-            print(f"Added {staff.name} into {self.staff}")
 
-        else:
-            print(f"The {staff.name} already exists in {self.staff}")
+
+    def add_staff(self, name, age, role, responsibilities):
+        staff_record = [self.id, name, age, role, responsibilities]
+
+        self.staff_record.append(staff_record)
+        print(f"Added {staff_record} \n Staff record: {self.staff_record}")
+
+        self.staff_id += 1
+
+    def remove_staff(self, staff_id):
+        for record in self.staff_record:
+            if record[0] == staff_id:
+                self.health_record.remove(record)
+                print(f"Removed {record} \nUpdated list: {self.staff_record}")
+                return self.staff_record
+
+        print("The staff record does not exist")
+        return None
+
+    def __str__(self):
+        return f"The staff are {self.staff_record}\n" f"The health records currently are {self.health_record}"
 
 class Zookeeper(Staff):
-    def __init__(self, role, responsibilities):
-        super().__init__(role, responsibilities)
+    def __init__(self):
+        super().__init__()
 
     def feed_animal(self, animals: Animal):
         if animals.feed is False:
@@ -88,7 +94,7 @@ class Zookeeper(Staff):
         health_record = [self.id, description, severity, notified, treatment_plan]
 
         self.health_record.append(health_record)
-        print(f"Added {health_record} \n self.health_record: {self.health_record}")
+        print(f"Added {health_record} \n Health_record: {self.health_record}")
 
         self.id += 1
 
@@ -97,14 +103,19 @@ class Zookeeper(Staff):
             if record[0] == id:
                self.health_record.remove(record)
                print(f"Removed {record} \nUpdated list: {self.health_record}")
-               return
+               return self.health_record
 
-        print("The health_record does not exist")
+        print("The Health record does not exist")
+        return None
+
+    def __str__(self):
+        parent_str = super().__str__()
+        return parent_str
 
 
 class Veterinarian(Staff):
-    def __init__(self, role, responsibilities):
-        super().__init__(role, responsibilities)
+    def __init__(self):
+        super().__init__()
 
     def health_check(self, animals: Animal):
         if not animals.health:
@@ -112,4 +123,8 @@ class Veterinarian(Staff):
            animals.health = True
         else:
             print(f"The {animals.name} is already healthy")
+
+    def __str__(self):
+        parent_str = super().__str__()
+        return parent_str
 
