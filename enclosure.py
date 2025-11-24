@@ -13,12 +13,19 @@ from abc import ABC, abstractmethod
 
 
 class Enclosure(ABC):
-    def __init__(self, size, environmental_type, cleanliness=False):
+    def __init__(self, name, size, environmental_type, cleanliness=False):
+        self.__name = name
         self.__size = size
         self.__environmental_type = environmental_type
         self.__cleanliness = cleanliness
+        self.__animal_enclosures = []
         self.__enclosures = []
+        self.__animal_enclosure_id = 1
         self.__enclosure_id = 1
+
+    @property
+    def name(self):
+        return self.__name
 
     @property
     def size(self):
@@ -33,20 +40,36 @@ class Enclosure(ABC):
         return self.__cleanliness
 
     @property
-    def enclosures(self):
-        return self.__enclosures
+    def animal_enclosures(self):
+        return self.__animal_enclosures
 
     @cleanliness.setter
     def cleanliness(self, value):
         self.__cleanliness = value
 
     @property
+    def animal_enclosure_id(self):
+        return self.__animal_enclosure_id
+
+    @animal_enclosure_id.setter
+    def animal_enclosure_id(self, value):
+        self.__animal_enclosure_id = value
+
+    @property
+    def enclosures(self):
+        return self.__enclosures
+
+    @enclosures.setter
+    def enclosures(self, value):
+        self.__enclosures = value
+
+    @property
     def enclosure_id(self):
         return self.__enclosure_id
 
     def check_type(self, animal: Animal):
-        if animal not in self.enclosures:
-           self.enclosures.append(animal)
+        if animal not in self.animal_enclosures:
+           self.animal_enclosures.append(animal)
            print(f"{animal.name} has joined {self.environmental_type}")
         else:
             print(f"{animal.name} has already joined {self.environmental_type}")
@@ -62,18 +85,18 @@ class Enclosure(ABC):
                  print(an.animal_name)
              return None
 
-    def add_enclosure(self, animal: Animal):
-        enclosure_record = self.enclosure_id, animal.name, animal.species, animal.age, animal.dietary
-        self.enclosures.append(enclosure_record)
-        print(f"Added {enclosure_record} \n Enclosure record: {self.enclosures}")
-        self.enclosure_id += 1
+    def assign_enclosure(self, animal: Animal):
+        animal_enclosure_record = self.animal_enclosure_id, animal.name, animal.species, animal.age, animal.dietary
+        self.animal_enclosures.append(animal_enclosure_record)
+        print(f"Added {animal_enclosure_record} \n Enclosure record: {self.animal_enclosures}")
+        self.animal_enclosure_id += 1
 
-    def remove_enclosure(self, id):
-        for enclosure_record in self.enclosures:
+    def design_enclosure(self, id):
+        for enclosure_record in self.animal_enclosures:
             if enclosure_record[0] == id:
-                self.enclosures.remove(enclosure_record)
-                print(f"Removed {enclosure_record} \nUpdated list: {self.enclosures}")
-                return self.enclosures
+                self.animal_enclosures.remove(enclosure_record)
+                print(f"Removed {enclosure_record} \nUpdated list: {self.animal_enclosures}")
+                return self.animal_enclosures
 
         print("The Enclosure record does not exist")
 
@@ -83,20 +106,18 @@ class Enclosure(ABC):
         pass
 
     def generate_report(self):
-        return f"The enclosures in the zoo are {self.enclosures} \nThe environmental types are {self.environmental_type} \nThe cleanliness are {self.cleanliness} \nThe animals are"
+        enclosure_record = self.enclosure_id, self.name, self.size, self.environmental_type, self.cleanliness
+        self.enclosures.append(enclosure_record)
+        print(f"Added {enclosure_record} \nEnclosure record: {self.enclosures}")
+        self.animal_enclosure_id += 1
     def __str__(self):
         return f"The animal is sleeping, {self.enclosures}"
 
-    @enclosure_id.setter
-    def enclosure_id(self, value):
-        self._enclosure_id = value
-
-
 class Aquatic(Enclosure):
-      def __init__(self, size, environmental_type, cleanliness):
-          super().__init__(size, environmental_type, cleanliness)
+      def __init__(self, name, size, environmental_type, cleanliness):
+          super().__init__(name, size, environmental_type, cleanliness)
 
 
 class Savanna(Enclosure):
-      def __init__(self, size, environmental_type, cleanliness):
-          super().__init__(size, environmental_type, cleanliness)
+      def __init__(self, name, size, environmental_type, cleanliness):
+          super().__init__(name, size, environmental_type, cleanliness)

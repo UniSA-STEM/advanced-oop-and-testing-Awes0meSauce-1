@@ -11,20 +11,23 @@ from enclosure import Enclosure, Aquatic, Savanna
 from animal import Animal, Mammal
 from staff import Staff, Zookeeper
 
-savannah = Savanna(1, "Savanna", "Clean")
+savannah = Savanna("Savannah", 1, "Savanna", "Clean")
+aquatic = Aquatic("Aquatic", 1, "Aquatic", "Clean")
 
 leo = Mammal("Leo", "Lion", 6, "Meat")
-savannah.add_enclosure(leo)
+savannah.assign_enclosure(leo)
 print(leo)
-
-zookeeper1 = Zookeeper()
-zookeeper1.add_staff("Jim", 21, "Zookeeper", "Feeds Animals and Cleans the Enclosures" )
-
+print(aquatic)
 savannah.generate_report()
-leo.animal_total_health("Light", "There is a slight bruise on the right arm.", "There are no behavioural concerns", "9th of November")
-print(savannah)
-zookeeper1.add_health_record("a", "a", "a", "a")
-zookeeper1.add_health_record("b", "b", "b", "b")
-zookeeper1.remove_health_record(1)
-print(zookeeper1)
+aquatic.generate_report()
+print(aquatic.enclosures)
+
+# jim = Zookeeper("Jim", 21, "Zookeeper", "Feeds Animals and Cleans the Enclosures")
+# jim.add_staff()
+# leo.animal_total_health("Light", "There is a slight bruise on the right arm.", "There are no behavioural concerns", "9th of November")
+# print(savannah)
+# jim.add_health_record("a", "a", "a", "a")
+# jim.add_health_record("b", "b", "b", "b")
+# jim.remove_health_record(1)
+# print(jim)
 

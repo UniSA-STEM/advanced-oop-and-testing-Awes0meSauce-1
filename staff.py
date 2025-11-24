@@ -14,11 +14,31 @@ from enclosure import Enclosure
 
 
 class Staff(ABC):
-    def __init__(self):
+    def __init__(self, name, age, role, responsibilities):
+        self.__name = name
+        self.__age = age
+        self.__role = role
+        self.__responsibilities = responsibilities
         self.__staff_record = []
         self.__health_record = []
         self.__id = 1
         self.__staff_id = 1
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def age(self):
+        return self.__age
+
+    @property
+    def role(self):
+        return self.__role
+
+    @property
+    def responsibilities(self):
+        return self.__responsibilities
 
     @property
     def staff_record(self):
@@ -50,8 +70,8 @@ class Staff(ABC):
 
 
 
-    def add_staff(self, name, age, role, responsibilities):
-        staff_record = [self.id, name, age, role, responsibilities]
+    def add_staff(self):
+        staff_record = [self.id, self.name, self.age, self.role, self.responsibilities]
 
         self.staff_record.append(staff_record)
         print(f"Added {staff_record} \n Staff record: {self.staff_record}")
@@ -72,8 +92,8 @@ class Staff(ABC):
         return f"The staff are {self.staff_record}\n" f"The health records currently are {self.health_record}"
 
 class Zookeeper(Staff):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name, age, role, responsibilities):
+        super().__init__(name, age, role, responsibilities)
 
     def feed_animal(self, animals: Animal):
         if animals.feed is False:
@@ -114,8 +134,9 @@ class Zookeeper(Staff):
 
 
 class Veterinarian(Staff):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name, age, role, responsibilities):
+        super().__init__(name, age, role, responsibilities)
+
 
     def health_check(self, animals: Animal):
         if not animals.health:
