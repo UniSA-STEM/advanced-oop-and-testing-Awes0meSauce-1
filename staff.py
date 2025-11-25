@@ -7,11 +7,6 @@ Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod
-
-from pandas import describe_option
-
-import animal
-import enclosure
 from animal import Animal
 from enclosure import Enclosure
 
@@ -101,14 +96,15 @@ class Staff(ABC):
     def __str__(self):
         return f"The staff are {self.staff_record}\n" f"The health records currently are {self.health_record}"
 
+
 class Zookeeper(Staff):
     def __init__(self, name, age, role, responsibilities):
         super().__init__(name, age, role, responsibilities)
 
     def feed_animal(self, animals: Animal):
         if animals.feed is False:
-           print(f"{animals.name} has been feed")
-           animals.feed = True
+            print(f"{animals.name} has been feed")
+            animals.feed = True
         else:
             print(f"{animals.name} has already been feed")
 
@@ -116,8 +112,8 @@ class Zookeeper(Staff):
 
     def clean_enclosure(self, enclosure: Enclosure):
         if enclosure.cleanliness is False:
-           print(f"The {enclosure.name} has been cleaned")
-           enclosure.cleanliness = True
+            print(f"The {enclosure.name} has been cleaned")
+            enclosure.cleanliness = True
         else:
             print(f"The {enclosure.name} has already been cleaned")
 
@@ -132,9 +128,9 @@ class Zookeeper(Staff):
     def remove_health_record(self, id):
         for record in self.health_record:
             if record[0] == id:
-               self.health_record.remove(record)
-               print(f"Removed {record} \nUpdated list: {self.health_record}")
-               return self.health_record
+                self.health_record.remove(record)
+                print(f"Removed {record} \nUpdated list: {self.health_record}")
+                return self.health_record
 
         print("The Health record does not exist")
         return None
@@ -148,17 +144,24 @@ class Veterinarian(Staff):
     def __init__(self, name, age, role, responsibilities):
         super().__init__(name, age, role, responsibilities)
 
+    def health_check(self, animal: Animal):
+        severity = ["Low", "Medium", "High", "Very High"]
+        for s in severity:
+            if animal.severity == s:
+               animal.health = False
+               print(f"{animal.name} {animal.health}")
+               return animal.health
 
-    def health_check(self, animals: Animal):
-        if not animals.health:
-           print(f"The {animals.name} is healthy now")
-           animals.health = True
-        else:
-            print(f"The {animals.name} is already healthy")
+            elif animal.severity == "None":
+                 animal.health = True
+                 print(f"{animal.name} {animal.health}")
+                 return animal.health
 
-        return animals.health
+            else:
+                 print(
+                 f"The {animal.severity} is not a valid severity please choose from" "['Low', 'Medium', 'High', 'Very High']")
+                 return animal.health
 
     def __str__(self):
         parent_str = super().__str__()
         return parent_str
-

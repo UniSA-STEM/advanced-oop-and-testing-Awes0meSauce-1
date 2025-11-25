@@ -101,7 +101,6 @@ class Animal(ABC):
     def animal_total_health(self, staff, severity, notes, behavioural_concerns, date):
         self.severity = severity
         self.notes = notes
-
         staff.animal_record = [self.animal_id, self.severity, self.notes, behavioural_concerns, date]
         self.animal_health.append(staff.animal_record)
         print(f"Added {staff.animal_record} \n Staff record: {self.animal_health}")
@@ -125,11 +124,6 @@ class Animal(ABC):
         else:
             print(f"The {animal.name} already exists in {animal.animals}")
 
-    def health_reports(self):
-        # TODO Record Health reports for individual animals or across the zoo
-        # TODO It should influence zoo operations (e.g animals under treatment should not be moved or displayed)
-        pass
-
     @abstractmethod
     def speak(self):
         pass
@@ -150,7 +144,7 @@ class Mammal(Animal):
         super().__init__(name, species, age, dietary)
 
     def speak(self):
-        return f"The {self.species} has spoken"
+        return f"The {self.species} has howled at the other animal"
 
     def eat(self):
         return f"The {self.species} has ate"
