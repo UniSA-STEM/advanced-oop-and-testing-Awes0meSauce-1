@@ -15,11 +15,15 @@ class Animal(ABC):
         self.__species = species
         self.__age = age
         self.__dietary = dietary
+        self.__feed = feed
+        self.__health = health
         self.__animals = []
         self.__animal_health = []
         self.__feed = feed
         self.__health = health
         self.__animal_id = 1
+        self.__severity = None
+        self.__notes = None
 
     def __eq__(self, other):
         if isinstance(other, Animal):
@@ -74,15 +78,36 @@ class Animal(ABC):
     def health(self, value):
         self.__health = value
 
+    @property
+    def severity(self):
+        return self.__severity
+
+    @severity.setter
+    def severity(self, value):
+        self.__severity = value
+
+    @property
+    def notes(self):
+        return self.__notes
+
+    @notes.setter
+    def notes(self, value):
+        self.__notes = value
+
+
     def assign_animal(self, animal):
         pass
 
-    def animal_total_health(self, severity, notes, behavioural_concerns, date):
-        animal_record = [self.animal_id, severity, notes, behavioural_concerns, date]
-        self.animal_health.append(animal_record)
-        print(f"Added {animal_record} \n Staff record: {self.animal_health}")
+    def animal_total_health(self, staff, severity, notes, behavioural_concerns, date):
+        self.severity = severity
+        self.notes = notes
+
+        staff.animal_record = [self.animal_id, self.severity, self.notes, behavioural_concerns, date]
+        self.animal_health.append(staff.animal_record)
+        print(f"Added {staff.animal_record} \n Staff record: {self.animal_health}")
         self.animal_id += 1
         return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}"
+
 
     def add_animals(self, animal):
         if animal not in animal.animals:

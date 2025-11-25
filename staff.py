@@ -8,6 +8,8 @@ This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod
 
+from pandas import describe_option
+
 import animal
 import enclosure
 from animal import Animal
@@ -119,12 +121,11 @@ class Zookeeper(Staff):
         else:
             print(f"The {enclosure.name} has already been cleaned")
 
-    def add_health_record(self, description, severity, notified, treatment_plan):
-
-        health_record = [self.id, description, severity, notified, treatment_plan]
+    def add_health_record(self, animal: Animal, notified, treatment_plan):
+        health_record = [self.id, animal.severity, animal.notes, notified, treatment_plan]
 
         self.health_record.append(health_record)
-        print(f"Added {health_record} \n Health_record: {self.health_record}")
+        print(f"Added {health_record} \nHealth_record: {self.health_record}")
 
         self.id += 1
 
