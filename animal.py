@@ -10,15 +10,15 @@ from abc import ABC, abstractmethod
 
 
 class Animal(ABC):
-    def __init__(self, name, species, age, dietary):
+    def __init__(self, name, species, age, dietary, feed=False, health=False):
         self.__name = name
         self.__species = species
         self.__age = age
         self.__dietary = dietary
         self.__animals = []
         self.__animal_health = []
-        self.__feed = False
-        self.__health = False
+        self.__feed = feed
+        self.__health =health
         self.__animal_id = 1
 
     def __eq__(self, other):
@@ -109,7 +109,7 @@ class Animal(ABC):
         pass
 
     def __str__(self):
-        return f"The current health for all the animals in the zoo is {self.animal_health}\n The animals are {self.animals} "
+        return f"{self.name}, {self.species}, {self.age}, {self.dietary}, {self.feed} {self.health} "
 
     @animal_id.setter
     def animal_id(self, value):

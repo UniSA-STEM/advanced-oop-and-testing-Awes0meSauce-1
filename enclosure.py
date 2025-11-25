@@ -82,11 +82,13 @@ class Enclosure(ABC):
         return self.__enclosure_id
 
     def check_type(self, animal: Animal):
-        if animal not in self.animal_enclosures:
-           self.animal_enclosures.append(animal)
-           print(f"{animal.name} has joined {self.environmental_type}")
-        else:
-            print(f"{animal.name} has already joined {self.environmental_type}")
+        for species in self.animal_enclosures:
+            different_species = species[2]
+            if different_species != animal.species:
+               print("The type of animal is wrong")
+               return True
+
+        return False
 
     def current_status(self):
         pass
@@ -100,6 +102,9 @@ class Enclosure(ABC):
              return None
 
     def assign_enclosure(self, animal: Animal):
+        if self.check_type(animal):
+           return
+
         animal_enclosure_record = self.animal_enclosure_id, animal.name, animal.species, animal.age, animal.dietary
         self.animal_enclosures.append(animal_enclosure_record)
         print(f"The Enclosure is {self.name}, it has added {animal_enclosure_record} \nEnclosure {self.name} record: {self.animal_enclosures}")
@@ -124,7 +129,7 @@ class Enclosure(ABC):
         pass
 
     def __str__(self):
-        return f"The animal is sleeping, {self.enclosures}"
+        return f"{self.name}, {self.size}, {self.environmental_type}, {self.cleanliness}"
 
 class Aquatic(Enclosure):
       def __init__(self, name, size, environmental_type, cleanliness):

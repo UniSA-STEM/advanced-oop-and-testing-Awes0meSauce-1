@@ -72,7 +72,7 @@ class Staff(ABC):
         staff_record = [self.id, self.name, self.age, self.role, self.responsibilities]
 
         self.staff_record.append(staff_record)
-        print(f"Added {staff_record} \n Staff record: {self.staff_record}")
+        print(f"Added {staff_record} \nStaff record: {self.staff_record}")
 
         self.staff_id += 1
 
@@ -95,17 +95,17 @@ class Zookeeper(Staff):
 
     def feed_animal(self, animals: Animal):
         if animals.feed is False:
-           print(f" The {animals.name} has been feed")
+           print(f"{animals.name} has been feed")
            animals.feed = True
         else:
-            print(f" The {animals.name} has already been feed")
+            print(f"{animals.name} has already been feed")
 
     def clean_enclosure(self, enclosure: Enclosure):
         if enclosure.cleanliness is False:
-           print(f" The {enclosure.cleanliness} has been cleaned")
+           print(f"The {enclosure.name} has been cleaned")
            enclosure.cleanliness = True
         else:
-            print(f" The {enclosure.cleanliness} has already been cleaned")
+            print(f"The {enclosure.name} has already been cleaned")
 
     def add_health_record(self, description, severity, notified, treatment_plan):
 
