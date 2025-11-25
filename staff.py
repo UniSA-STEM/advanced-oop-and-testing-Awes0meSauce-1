@@ -9,6 +9,7 @@ This is my own work as defined by the University's Academic Integrity Policy.
 from abc import ABC, abstractmethod
 
 import animal
+import enclosure
 from animal import Animal
 from enclosure import Enclosure
 
@@ -86,6 +87,15 @@ class Staff(ABC):
         print("The staff record does not exist")
         return None
 
+    def staff_assign_enclosure(self, enclosure: Enclosure):
+        staff_enclosure_record = enclosure.staff_id, self.name, self.age, self.role, self.responsibilities
+        enclosure.animal_enclosures.append(staff_enclosure_record)
+        print(
+            f"The Enclosure is {enclosure.name}, it has added {staff_enclosure_record} \nEnclosure {enclosure.name} record: {enclosure.animal_enclosures}")
+        self.staff_id += 1
+
+        return None
+
     def __str__(self):
         return f"The staff are {self.staff_record}\n" f"The health records currently are {self.health_record}"
 
@@ -99,6 +109,8 @@ class Zookeeper(Staff):
            animals.feed = True
         else:
             print(f"{animals.name} has already been feed")
+
+        return f"The animal {animals.name} fed level is {animals.feed} "
 
     def clean_enclosure(self, enclosure: Enclosure):
         if enclosure.cleanliness is False:
@@ -142,6 +154,8 @@ class Veterinarian(Staff):
            animals.health = True
         else:
             print(f"The {animals.name} is already healthy")
+
+        return animals.health
 
     def __str__(self):
         parent_str = super().__str__()

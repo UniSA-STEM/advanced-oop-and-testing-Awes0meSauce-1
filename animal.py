@@ -18,7 +18,7 @@ class Animal(ABC):
         self.__animals = []
         self.__animal_health = []
         self.__feed = feed
-        self.__health =health
+        self.__health = health
         self.__animal_id = 1
 
     def __eq__(self, other):
@@ -62,8 +62,17 @@ class Animal(ABC):
     def animal_id(self):
         return self.__animal_id
 
+    @animal_id.setter
+    def animal_id(self, value):
+        self._animal_id = value
+
+    @property
     def health(self):
         return self.__health
+
+    @health.setter
+    def health(self, value):
+        self.__health = value
 
     def assign_animal(self, animal):
         pass
@@ -109,12 +118,7 @@ class Animal(ABC):
         pass
 
     def __str__(self):
-        return f"{self.name}, {self.species}, {self.age}, {self.dietary}, {self.feed} {self.health} "
-
-    @animal_id.setter
-    def animal_id(self, value):
-        self._animal_id = value
-
+        return f"{self.name}, {self.species}, {self.age}, {self.dietary}, {self.feed}, {self.health} "
 
 class Mammal(Animal):
     def __init__(self, name, species, age, dietary):

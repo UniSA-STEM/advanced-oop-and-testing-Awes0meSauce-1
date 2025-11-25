@@ -11,7 +11,6 @@ from animal import Animal, Mammal
 
 from abc import ABC, abstractmethod
 
-
 class Enclosure(ABC):
     __next_id = 1
     __total_records = []
@@ -28,6 +27,7 @@ class Enclosure(ABC):
         self.__enclosures = []
         self.__animal_enclosure_id = 1
         self.__enclosure_id = 1
+        self.__staff_id = 1
 
     @property
     def id(self):
@@ -70,16 +70,20 @@ class Enclosure(ABC):
         self.__animal_enclosure_id = value
 
     @property
+    def enclosure_id(self):
+        return self.__enclosure_id
+
+    @property
+    def staff_id(self):
+        return self.__staff_id
+
+    @property
     def enclosures(self):
         return self.__enclosures
 
     @enclosures.setter
     def enclosures(self, value):
         self.__enclosures = value
-
-    @property
-    def enclosure_id(self):
-        return self.__enclosure_id
 
     def check_type(self, animal: Animal):
         for species in self.animal_enclosures:
@@ -90,8 +94,9 @@ class Enclosure(ABC):
 
         return False
 
-    def current_status(self):
-        pass
+    def daily_tasks(self, daily_tasks = list):
+        for d in daily_tasks:
+            print("Daily Task:", d)
 
     def list_of_animals(self):
         if not test.animals:
@@ -101,7 +106,7 @@ class Enclosure(ABC):
                  print(an.animal_name)
              return None
 
-    def assign_enclosure(self, animal: Animal):
+    def animal_assign_enclosure(self, animal: Animal):
         if self.check_type(animal):
            return
 
@@ -110,7 +115,7 @@ class Enclosure(ABC):
         print(f"The Enclosure is {self.name}, it has added {animal_enclosure_record} \nEnclosure {self.name} record: {self.animal_enclosures}")
         self.animal_enclosure_id += 1
 
-    def design_enclosure(self, id):
+    def animal_design_enclosure(self, id):
         for enclosure_record in self.animal_enclosures:
             if enclosure_record[0] == id:
                 self.animal_enclosures.remove(enclosure_record)
@@ -118,11 +123,8 @@ class Enclosure(ABC):
                 return self.animal_enclosures
 
         print("The Enclosure record does not exist")
-
         return None
 
-    def daily_routines(self):
-        pass
 
     @abstractmethod
     def generate_report(self):
@@ -130,6 +132,11 @@ class Enclosure(ABC):
 
     def __str__(self):
         return f"{self.name}, {self.size}, {self.environmental_type}, {self.cleanliness}"
+
+    @staff_id.setter
+    def staff_id(self, value):
+        self._staff_id = value
+
 
 class Aquatic(Enclosure):
       def __init__(self, name, size, environmental_type, cleanliness):
