@@ -10,9 +10,11 @@ from animal import Animal, Mammal
 
 from abc import ABC, abstractmethod
 
+
 class Enclosure(ABC):
     __next_id = 1
     __total_records = []
+
     def __init__(self, name, size, environmental_type, cleanliness=False):
         self.__total_records = Enclosure.__total_records
         self.__id = Enclosure.__next_id
@@ -88,30 +90,45 @@ class Enclosure(ABC):
         for species in self.animal_enclosures:
             different_species = species[2]
             if different_species != animal.species:
-               print("The type of animal is wrong")
-               return True
+                print("Only one type of animal can be in a enclosure, please use the same species.")
+                return True
 
         return False
 
-    def daily_tasks(self, daily_tasks = list):
+    def check_size(self, animal: Animal):
+        maximum_size = self.size
+        current_animals = len(self.animal_enclosures)
+        if current_animals >= maximum_size:
+           print(
+                "The maximum size of the enclosure cannot be greater than the amount of animals in the enclosure."
+           )
+           return True
+
+        return False
+
+    def daily_tasks(self, daily_tasks=list):
         for d in daily_tasks:
             print("Daily Task:", d)
 
     def list_of_animals(self):
         if not test.animals:
-           return "There are no animals in this environment"
+            return "There are no animals in this environment"
         else:
-             for an in test.animals:
-                 print(an.animal_name)
-             return None
+            for an in test.animals:
+                print(an.animal_name)
+            return None
 
     def animal_assign_enclosure(self, animal: Animal):
         if self.check_type(animal):
            return
 
+        if self.check_size(animal):
+           return
+
         animal_enclosure_record = self.animal_enclosure_id, animal.name, animal.species, animal.age, animal.dietary
         self.animal_enclosures.append(animal_enclosure_record)
-        print(f"The Enclosure is {self.name}, it has added {animal_enclosure_record} \nEnclosure {self.name} record: {self.animal_enclosures}")
+        print(
+            f"The Enclosure is {self.name}, it has added {animal_enclosure_record} \nEnclosure {self.name} record: {self.animal_enclosures}")
         self.animal_enclosure_id += 1
 
     def animal_design_enclosure(self, id):
@@ -123,7 +140,6 @@ class Enclosure(ABC):
 
         print("The Enclosure record does not exist")
         return None
-
 
     @abstractmethod
     def generate_report(self):
@@ -138,22 +154,26 @@ class Enclosure(ABC):
 
 
 class Aquatic(Enclosure):
-      def __init__(self, name, size, environmental_type, cleanliness):
-          super().__init__(name, size, environmental_type, cleanliness)
+    def __init__(self, name, size, environmental_type, cleanliness):
+        super().__init__(name, size, environmental_type, cleanliness)
 
-      def generate_report(self):
-          enclosure_record = self.id, self.name, self.size, self.environmental_type, self.cleanliness
-          self.total_records.append(enclosure_record)
-          print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}")
-          return enclosure_record
+    def generate_report(self):
+        enclosure_record = self.id, self.name, self.size, self.environmental_type, self.cleanliness
+        self.total_records.append(enclosure_record)
+        print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}")
+        return enclosure_record
 
 
 class Savanna(Enclosure):
-      def __init__(self, name, size, environmental_type, cleanliness):
-          super().__init__(name, size, environmental_type, cleanliness)
+    def __init__(self, name, size, environmental_type, cleanliness):
+        super().__init__(name, size, environmental_type, cleanliness)
 
-      def generate_report(self):
-          enclosure_record = self.id, self.name, self.size, self.environmental_type, self.cleanliness
-          self.total_records.append(enclosure_record)
-          print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}")
-          return enclosure_record
+    def generate_report(self):
+        enclosure_record = (f"ID: {self.id}, "
+                            f"Name: {self.name}, "
+                            f"Size: {self.size}, "
+                            f"Environmental Type: {self.environmental_type}, "
+                            f"Cleanliness: {self.cleanliness}")
+        self.total_records.append(enclosure_record)
+        print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}")
+        return enclosure_record

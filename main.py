@@ -11,12 +11,23 @@ from enclosure import Enclosure, Aquatic, Savanna
 from animal import Animal, Mammal, Reptile
 from staff import Staff, Zookeeper, Veterinarian
 
-savannah = Savanna("Savannah", 1, "Savanna", False)
+savannah = Savanna("Savannah", 2, "Savanna", False)
 aquatic = Aquatic("Aquatic", 1, "Aquatic", False)
 
 leo = Mammal("Leo", "Lion", 6, "Meat")
+butter = Mammal("Butter", "Lion", 7, "Meat")
 dip = Reptile("Dip", "Fish", 6, "Grass")
 
 jim = Zookeeper("Jim", 21, "Zookeeper", "Feeds Animals and Cleans the Enclosures")
 bob = Veterinarian("Bob", 18, "Veterinarian", False)
 
+savannah.animal_assign_enclosure(leo)
+savannah.animal_assign_enclosure(butter)
+savannah.generate_report()
+jim.add_staff()
+leo.add_animals(leo)
+jim.feed_animal(leo)
+savannah.daily_tasks([jim.feed_animal(leo)])
+jim.clean_enclosure(savannah)
+leo.animal_total_health(leo, "Low", "Has a small cut on the right arm", "None", "9th of November")
+bob.health_check(leo)

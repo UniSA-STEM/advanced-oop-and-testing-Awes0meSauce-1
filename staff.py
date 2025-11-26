@@ -161,6 +161,7 @@ class Veterinarian(Staff):
                  print(
                  f"The {animal.severity} is not a valid severity please choose from" "['Low', 'Medium', 'High', 'Very High']")
                  return animal.health
+        return None
 
     def __str__(self):
         parent_str = super().__str__()
