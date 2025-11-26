@@ -107,23 +107,6 @@ class Animal(ABC):
         self.animal_id += 1
         return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}"
 
-
-    def add_animals(self, animal):
-        if animal not in animal.animals:
-            animal.animals.append(animal)
-            print(f"Added {animal.name} into {animal.animals}")
-
-        else:
-            print(f"The {animal.name} already exists in {animal.animals}")
-
-    def remove_animals(self, animal):
-        if animal not in animal.animals:
-            animal.animals.append(animal)
-            print(f"Added {animal.name} into {animal.animals}")
-
-        else:
-            print(f"The {animal.name} already exists in {animal.animals}")
-
     @abstractmethod
     def speak(self):
         pass
