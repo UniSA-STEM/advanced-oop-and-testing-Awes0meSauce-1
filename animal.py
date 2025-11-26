@@ -8,6 +8,8 @@ This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod
 
+from exception import AnimalFullException
+
 
 class Animal(ABC):
     def __init__(self, name, species, age, dietary, feed=False, health=False):

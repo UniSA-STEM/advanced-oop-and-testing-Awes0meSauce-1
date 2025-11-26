@@ -9,6 +9,8 @@ This is my own work as defined by the University's Academic Integrity Policy.
 from abc import ABC, abstractmethod
 from animal import Animal
 from enclosure import Enclosure
+from exception import AnimalFullException, EnclosureCleanedException, UnsufficientHealthRecordException, \
+    InsufficientSeverityException
 
 
 class Staff(ABC):
@@ -78,6 +80,7 @@ class Staff(ABC):
         self.__staff_id = value
 
         # This function will assign a staff member to an enclosure of the desired type using the (enclosure: Enclosure) method
+
     def staff_assign_enclosure(self, enclosure: Enclosure):
         # Using the staff enclosure record method it will assign, the enclosure staff_id, the enclosures name,
         # the enclosures age, the enclosures role and the enclosures responsibilities to the method
@@ -109,34 +112,38 @@ class Zookeeper(Staff):
     # change the "animals" feed to True
     def feed_animal(self, animals: Animal):
         # Checking if the animals feed is False
-        if animals.feed is False:
-            # Printing an output
-            print(f"{animals.name} has been feed")
+        try:
+            if animals.feed is False:
+                # Printing an output
+                print(f"{animals.name} has been feed")
+                # Changing the value to true
+                animals.feed = True
 
-            # Changing the value to true
-            animals.feed = True
-
-        #If it has already been fed it will produce this output
-        else:
-            print(f"{animals.name} has already been feed")
-
-        return f"The animal {animals.name} fed level is {animals.feed} "
+            #If it has already been fed it will produce this output
+            else:
+                raise AnimalFullException(f"{animals.name} has already been feed")
+        except AnimalFullException as e:
+            print(e)
+            return f"The animal {animals.name} fed level is {animals.feed}"
 
     # This will check if the enclosure has been cleaned using the enclosure: Enclosure method
     # if the enclosure cleanliness is False it will produce an output and change the enclosure cleanliness
     # to true
     def clean_enclosure(self, enclosure: Enclosure):
         # Checking if the enclosure cleanliness is false
-        if enclosure.cleanliness is False:
-            # Printing an output
-            print(f"The {enclosure.name} has been cleaned")
-            # Changing the enclosure cleanliness to true
-            enclosure.cleanliness = True
+        try:
+            if enclosure.cleanliness is False:
+                # Printing an output
+                print(f"The {enclosure.name} has been cleaned")
+                # Changing the enclosure cleanliness to true
+                enclosure.cleanliness = True
 
-        # If it's already cleaned it will print an output saying it's already been cleaned
-        else:
-            print(f"The {enclosure.name} has already been cleaned")
+                # If it's already cleaned it will print an output saying it's already been cleaned
+            else:
+                raise EnclosureCleanedException(f"The {enclosure.name} has already been cleaned")
 
+        except EnclosureCleanedException as e:
+            print(e)
 
     # This will add a health record checking what animal it is using the animal: Animal method, checking if it's notified
     # using the notified method and check what treatment_plan the animal has or hasn't been applied to the animal.
@@ -160,17 +167,22 @@ class Zookeeper(Staff):
         for record in self.health_record:
             # This will check if the "record" value is equal to the id to see if it's the desired record
             # that needs removing
-            if record[0] == id:
+            try:
+                if record[0] == id:
                 # Then it will remove said record
-                self.health_record.remove(record)
-                # And print an output because of it
-                print(f"Removed {record} \nUpdated list: {self.health_record}")
+                   self.health_record.remove(record)
+                   # And print an output because of it
+                   print(f"Removed {record} \nUpdated list: {self.health_record}")
 
-                # Then returning the updated health records
-                return self.health_record
+                   # Then returning the updated health records
+                   return self.health_record
 
-        # If the health record doesn't exist it will print this output
-        print("The Health record does not exist")
+           # If the health record doesn't exist it will print this output
+                else:
+                    raise UnsufficientHealthRecordException("The Health record does not exist")
+            except AnimalFullException as e:
+                  print(e)
+                  return None
         return None
 
     # Then it will be able to return the parent's string into the children string
@@ -184,7 +196,6 @@ class Veterinarian(Staff):
     def __init__(self, name, age, role, responsibilities):
         super().__init__(name, age, role, responsibilities)
 
-
     # This will check the health of the animal using the animal: Animal method
     def health_check(self, animal: Animal):
         # This will check for the severity of the animal being Low, Medium, High or Very High
@@ -192,29 +203,30 @@ class Veterinarian(Staff):
         # This will loop using a for loop of the severity above.
         for s in severity:
             # Then it will check if the animal severity matches
-            if animal.severity == s:
-               # Then it will set the animals health to False because it has some kind of injury
-               animal.health = False
-               # Then printing an output to match the method above
-               print(f"{animal.name} {animal.health}")
-               return animal.health
+            try:
+                if animal.severity == s:
+                # Then it will set the animals health to False because it has some kind of injury
+                   animal.health = False
+                # Then printing an output to match the method above
+                   print(f"{animal.name} {animal.health}")
+                   return animal.health
 
             # Otherwise if the animal isn't injured in some way it will return the animals health to true
-            elif animal.severity == "None":
-                 # Setting the animals health here
-                 animal.health = True
-                 # And printing an output here
-                 print(f"{animal.name} {animal.health}")
-                 return animal.health
+                elif animal.severity == "None":
+                # Setting the animals health here
+                     animal.health = True
+                # And printing an output here
+                     print(f"{animal.name} {animal.health}")
+                     return animal.health
 
             # Otherwise if the severity in this function isn't one of the values mentioned above it will tell the user to input
             # a correct severity.
-            else:
-                 print(
-                 f"The {animal.severity} is not a valid severity please choose from" "['None' 'Low', 'Medium', 'High', 'Very High']")
-                 return animal.health
-        return None
-
+                else:
+                     raise InsufficientSeverityException(
+                     f"The {animal.severity} is not a valid severity please choose from" "['None' 'Low', 'Medium', 'High', 'Very High']")
+            except InsufficientSeverityException as e:
+                   print(e)
+                   return animal.health
 
     # Returning the parents string to the children string
     def __str__(self):
