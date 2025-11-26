@@ -149,6 +149,11 @@ class Enclosure(ABC):
         if self.check_size(animal):
            return
 
+        if animal.animal_treatment():
+           return
+
+
+
         old_enclosure.animal_design_enclosure(id)
         new_enclosure.animal_assign_enclosure(animal)
 

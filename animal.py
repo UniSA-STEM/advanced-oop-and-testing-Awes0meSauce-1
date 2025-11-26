@@ -107,6 +107,11 @@ class Animal(ABC):
         self.animal_id += 1
         return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}"
 
+    def animal_treatment(self):
+        if not self.health:
+           print("This animal can't be moved since it's being treated")
+           return True
+        return False
 
     @abstractmethod
     def speak(self):

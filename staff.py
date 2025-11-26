@@ -22,46 +22,57 @@ class Staff(ABC):
         self.__id = 1
         self.__staff_id = 1
 
+    # Is the getter of the method (name)
     @property
     def name(self):
         return self.__name
 
+    # Is the getter of the method (age)
     @property
     def age(self):
         return self.__age
 
+    # Is the getter of the method (role)
     @property
     def role(self):
         return self.__role
 
+    # Is the getter of the method (responsibilities)
     @property
     def responsibilities(self):
         return self.__responsibilities
 
+    # Is the getter of the method (staff record)
     @property
     def staff_record(self):
         return self.__staff_record
 
+    # Is the getter of the method (health record)
     @property
     def health_record(self):
         return self.__health_record
 
+    # Is the setter of the method (health record)
     @health_record.setter
     def health_record(self, value):
         self.__health_record = value
 
+    # Is the getter of the method (id)
     @property
     def id(self):
         return self.__id
 
+    # Is the setter of the method (id)
     @id.setter
     def id(self, value):
         self.__id = value
 
+    # Is the getter of the method (staff id)
     @property
     def staff_id(self):
         return self.__staff_id
 
+    # Is the setter of the method (staff id)
     @staff_id.setter
     def staff_id(self, value):
         self.__staff_id = value
@@ -162,6 +173,7 @@ class Veterinarian(Staff):
                  f"The {animal.severity} is not a valid severity please choose from" "['Low', 'Medium', 'High', 'Very High']")
                  return animal.health
         return None
+
 
     def __str__(self):
         parent_str = super().__str__()
