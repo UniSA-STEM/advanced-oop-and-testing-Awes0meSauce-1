@@ -19,8 +19,6 @@ class Animal(ABC):
         self.__health = health
         self.__animals = []
         self.__animal_health = []
-        self.__feed = feed
-        self.__health = health
         self.__animal_id = 1
         self.__severity = None
         self.__notes = None
