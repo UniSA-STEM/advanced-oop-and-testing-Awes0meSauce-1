@@ -141,6 +141,18 @@ class Enclosure(ABC):
         print("The Enclosure record does not exist")
         return None
 
+    def animal_move_enclosure(self, id, animal: Animal, old_enclosure, new_enclosure):
+
+        if self.check_type(animal):
+           return
+
+        if self.check_size(animal):
+           return
+
+        old_enclosure.animal_design_enclosure(id)
+        new_enclosure.animal_assign_enclosure(animal)
+
+
     @abstractmethod
     def generate_report(self):
         pass

@@ -107,6 +107,7 @@ class Animal(ABC):
         self.animal_id += 1
         return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}"
 
+
     @abstractmethod
     def speak(self):
         pass

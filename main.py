@@ -12,6 +12,7 @@ from animal import Animal, Mammal, Reptile
 from staff import Staff, Zookeeper, Veterinarian
 
 savannah = Savanna("Savannah", 2, "Savanna", False)
+savannah2 = Savanna("Savannah2", 2, "Savanna", False)
 aquatic = Aquatic("Aquatic", 1, "Aquatic", False)
 
 leo = Mammal("Leo", "Lion", 6, "Meat")
@@ -23,6 +24,7 @@ bob = Veterinarian("Bob", 18, "Veterinarian", False)
 
 savannah.animal_assign_enclosure(leo)
 savannah.animal_assign_enclosure(butter)
+savannah2.animal_move_enclosure(1, leo, savannah, savannah2)
 savannah.generate_report()
 jim.add_staff()
 jim.feed_animal(leo)
