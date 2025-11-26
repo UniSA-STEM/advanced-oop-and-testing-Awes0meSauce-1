@@ -79,8 +79,8 @@ class Staff(ABC):
 
         # This function will assign a staff member to an enclosure of the desired type using the (enclosure: Enclosure) method
     def staff_assign_enclosure(self, enclosure: Enclosure):
-        # Using the staff enclosure record method it will assign, the enclosure staff_id, the enclosures name, the enclosures age,
-        # the enclosures role and the enclosures responsibilities to the method
+        # Using the staff enclosure record method it will assign, the enclosure staff_id, the enclosures name,
+        # the enclosures age, the enclosures role and the enclosures responsibilities to the method
         staff_enclosure_record = enclosure.staff_id, self.name, self.age, self.role, self.responsibilities
 
         # Then it will append the method above to the enclosures animal_enclosure list

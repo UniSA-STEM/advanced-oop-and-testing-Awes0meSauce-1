@@ -6,9 +6,10 @@ ID: 110100110
 Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
-from animal import Animal, Mammal
-
 from abc import ABC, abstractmethod
+
+from exception import EnclosureFullException, SingleSpeciesException, IDEnclosureException
+from animal import Animal
 
 
 class Enclosure(ABC):
@@ -114,32 +115,41 @@ class Enclosure(ABC):
             # work, and then it will assign it to the different_species method.
             different_species = species[2]
             # Then if the "different_species" is not equal to the animal species it will print an output below
-            if different_species != animal.species:
-                # Said output
-                print("Only one type of animal can be in a enclosure, please use the same species.")
+            try:
+                if different_species != animal.species:
+                   # Said output
+                   raise SingleSpeciesException(
+                   f"{different_species} is the only species. Cannot add {animal.species}")
+
+                return False
+
+            except SingleSpeciesException as e:
+                print(e)
                 return True
-
-        return False
-
+        return None
 
     # This will check the size of the enclosure and if the animals exceed the size of the enclosure it will return true
     # if not it will return false
-    def check_size(self, animal: Animal):
+    def check_size(self, animal):
         # This will make the new method "maximum_size = the current size of the enclosure
         maximum_size = self.size
         # Then it will make the new method "current_animals" into the length of the enclosure which in this case
         # would be how many animals there are
         current_animals = len(self.animal_enclosures)
         # Then it will check if the current animals in the enclosure is greater or equal to the maximum size of the enclosure
-        if current_animals >= maximum_size:
-            # If it is it will print out this output
-           print(
-                "The maximum size of the enclosure cannot be greater than the amount of animals in the enclosure."
-           )
-            # And returning a value of this being true
-           return True
+        try:
+            if current_animals >= maximum_size:
+                # If it is it will print out this output
+                raise EnclosureFullException(
+                    f"{self.name} is full (Capacity {self.size}). Cannot add {animal.name}."
+                )
 
-        return False
+            # And returning a value of this being false.
+            return False
+
+        except EnclosureFullException as e:
+            print(e)
+            return True
 
     # Using a list as the daily_tasks this will print the daily_tasks needed while also being an output for different
     # functions and calls
@@ -153,11 +163,11 @@ class Enclosure(ABC):
     def animal_assign_enclosure(self, animal: Animal):
         # Checking the check_type function
         if self.check_type(animal):
-           return
+            return
 
         # Checking the check_size function
         if self.check_size(animal):
-           return
+            return
 
         # This will set the animal enclosures id, the animals name, the species of the animal, the age of the animal
         # and the dietary of the animal to animal enclosure record
@@ -174,35 +184,37 @@ class Enclosure(ABC):
     # it will design an animal to an enclosure by using the id to check which animal needs designing to the enclosure
     def animal_design_enclosure(self, id):
         # This will loop through all the animals in the enclosure
-        for enclosure_record in self.animal_enclosures:
+        try:
+            for enclosure_record in self.animal_enclosures:
             # Then checking the id in the enclosure is equal to the id requested
-            if enclosure_record[0] == id:
-                # It wil remove the specific enclosure desired
-                self.animal_enclosures.remove(enclosure_record)
-                # And print an output.
-                print(f"Removed {enclosure_record} \nUpdated list: {self.animal_enclosures}")
-                return self.animal_enclosures
+                if enclosure_record[0] == id:
+                   # It wil remove the specific enclosure desired
+                   self.animal_enclosures.remove(enclosure_record)
+                   # And print an output.
+                   print(f"Removed {enclosure_record} \nUpdated list: {self.animal_enclosures}")
+                   return self.animal_enclosures
 
         # If the id is not in the list of animals in the enclosure it will post this.
-        print("The Enclosure record does not exist")
-        return None
+            raise IDEnclosureException(f"Enclosure record with ID: {id} does not exist.")
 
+        except IDEnclosureException as e:
+            print(e)
+            return None
     # This will move an animal to an different enclosure by inputting the old_enclosure the animal is
     # currently in and the new enclosure also importing the animal class using animal: Animal
     def animal_move_enclosure(self, id, animal: Animal, old_enclosure, new_enclosure):
 
         # This will check the type of the animal
         if self.check_type(animal):
-           return
+            return
 
         # Then it will check the size of the enclosure
         if self.check_size(animal):
-           return
+            return
 
         # Then it will check if the animal has been treated or not
         if animal.animal_treatment():
-           return
-
+            return
 
         # Then it will pass the old_enclosure and the id into the animal_design_enclosure function
         old_enclosure.animal_design_enclosure(id)
@@ -216,6 +228,7 @@ class Enclosure(ABC):
 
     def __str__(self):
         return f"{self.name}, {self.size}, {self.environmental_type}, {self.cleanliness}"
+
 
 class Aquatic(Enclosure):
     def __init__(self, name, size, environmental_type, cleanliness):
