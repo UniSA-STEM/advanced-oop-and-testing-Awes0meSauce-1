@@ -77,29 +77,20 @@ class Staff(ABC):
     def staff_id(self, value):
         self.__staff_id = value
 
-    def add_staff(self):
-        staff_record = [self.id, self.name, self.age, self.role, self.responsibilities]
-
-        self.staff_record.append(staff_record)
-        print(f"Added {staff_record} \nStaff record: {self.staff_record}")
-
-        self.staff_id += 1
-
-    def remove_staff(self, staff_id):
-        for record in self.staff_record:
-            if record[0] == staff_id:
-                self.health_record.remove(record)
-                print(f"Removed {record} \nUpdated list: {self.staff_record}")
-                return self.staff_record
-
-        print("The staff record does not exist")
-        return None
-
+        # This function will assign a staff member to an enclosure of the desired type using the (enclosure: Enclosure) method
     def staff_assign_enclosure(self, enclosure: Enclosure):
+        # Using the staff enclosure record method it will assign, the enclosure staff_id, the enclosures name, the enclosures age,
+        # the enclosures role and the enclosures responsibilities to the method
         staff_enclosure_record = enclosure.staff_id, self.name, self.age, self.role, self.responsibilities
+
+        # Then it will append the method above to the enclosures animal_enclosure list
         enclosure.animal_enclosures.append(staff_enclosure_record)
+
+        # Then it will print the output below.
         print(
             f"The Enclosure is {enclosure.name}, it has added {staff_enclosure_record} \nEnclosure {enclosure.name} record: {enclosure.animal_enclosures}")
+
+        # Then it will increase the staff id so each staff will have a different id
         self.staff_id += 1
 
         return None
@@ -110,71 +101,122 @@ class Staff(ABC):
 
 class Zookeeper(Staff):
     def __init__(self, name, age, role, responsibilities):
+
+        # This will return the parent class being staff into the children's class being (Zookeeper)
         super().__init__(name, age, role, responsibilities)
 
+    # This will check if the animal has been feed, if the animal has not been feed it will print and output and
+    # change the "animals" feed to True
     def feed_animal(self, animals: Animal):
+        # Checking if the animals feed is False
         if animals.feed is False:
+            # Printing an output
             print(f"{animals.name} has been feed")
+
+            # Changing the value to true
             animals.feed = True
+
+        #If it has already been fed it will produce this output
         else:
             print(f"{animals.name} has already been feed")
 
         return f"The animal {animals.name} fed level is {animals.feed} "
 
+    # This will check if the enclosure has been cleaned using the enclosure: Enclosure method
+    # if the enclosure cleanliness is False it will produce an output and change the enclosure cleanliness
+    # to true
     def clean_enclosure(self, enclosure: Enclosure):
+        # Checking if the enclosure cleanliness is false
         if enclosure.cleanliness is False:
+            # Printing an output
             print(f"The {enclosure.name} has been cleaned")
+            # Changing the enclosure cleanliness to true
             enclosure.cleanliness = True
+
+        # If it's already cleaned it will print an output saying it's already been cleaned
         else:
             print(f"The {enclosure.name} has already been cleaned")
 
+
+    # This will add a health record checking what animal it is using the animal: Animal method, checking if it's notified
+    # using the notified method and check what treatment_plan the animal has or hasn't been applied to the animal.
     def add_health_record(self, animal: Animal, notified, treatment_plan):
+
+        # This will assign the severity of the animal, the notes of the animal if it's been notified and the
+        # treatment plan to the method (health_record)
         health_record = [self.id, animal.severity, animal.notes, notified, treatment_plan]
 
+        # Then it will append it to a self version of the health record
         self.health_record.append(health_record)
         print(f"Added {health_record} \nHealth_record: {self.health_record}")
 
+        # It will increase the id so each record will have a different id.
         self.id += 1
 
+    # Basically this will do the opposite of the add health record function and instead of adding a health record
+    # it will remove a health_record using the id as a base to check which one it needs to remove.
     def remove_health_record(self, id):
+        # Using a for loop it will loop through all the records
         for record in self.health_record:
+            # This will check if the "record" value is equal to the id to see if it's the desired record
+            # that needs removing
             if record[0] == id:
+                # Then it will remove said record
                 self.health_record.remove(record)
+                # And print an output because of it
                 print(f"Removed {record} \nUpdated list: {self.health_record}")
+
+                # Then returning the updated health records
                 return self.health_record
 
+        # If the health record doesn't exist it will print this output
         print("The Health record does not exist")
         return None
 
+    # Then it will be able to return the parent's string into the children string
     def __str__(self):
         parent_str = super().__str__()
         return parent_str
 
 
 class Veterinarian(Staff):
+    # This will return the parents __init__ function into the children __init__ function
     def __init__(self, name, age, role, responsibilities):
         super().__init__(name, age, role, responsibilities)
 
+
+    # This will check the health of the animal using the animal: Animal method
     def health_check(self, animal: Animal):
+        # This will check for the severity of the animal being Low, Medium, High or Very High
         severity = ["Low", "Medium", "High", "Very High"]
+        # This will loop using a for loop of the severity above.
         for s in severity:
+            # Then it will check if the animal severity matches
             if animal.severity == s:
+               # Then it will set the animals health to False because it has some kind of injury
                animal.health = False
+               # Then printing an output to match the method above
                print(f"{animal.name} {animal.health}")
                return animal.health
 
+            # Otherwise if the animal isn't injured in some way it will return the animals health to true
             elif animal.severity == "None":
+                 # Setting the animals health here
                  animal.health = True
+                 # And printing an output here
                  print(f"{animal.name} {animal.health}")
                  return animal.health
 
+            # Otherwise if the severity in this function isn't one of the values mentioned above it will tell the user to input
+            # a correct severity.
             else:
                  print(
-                 f"The {animal.severity} is not a valid severity please choose from" "['Low', 'Medium', 'High', 'Very High']")
+                 f"The {animal.severity} is not a valid severity please choose from" "['None' 'Low', 'Medium', 'High', 'Very High']")
                  return animal.health
         return None
 
 
+    # Returning the parents string to the children string
     def __str__(self):
         parent_str = super().__str__()
         return parent_str
