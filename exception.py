@@ -21,3 +21,6 @@ class UnsufficientHealthRecordException(CustomException):
 
 class InsufficientSeverityException(CustomException):
     pass
+
+class AnimalTreatmentException(CustomException):
+    pass

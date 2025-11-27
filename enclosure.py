@@ -119,7 +119,7 @@ class Enclosure(ABC):
                 if different_species != animal.species:
                    # Said output
                    raise SingleSpeciesException(
-                   f"{different_species} is the only species. Cannot add {animal.species}")
+                   f"{different_species} is the only species. Cannot add the species {animal.species}\n")
 
                 return False
 
@@ -141,7 +141,7 @@ class Enclosure(ABC):
             if current_animals >= maximum_size:
                 # If it is it will print out this output
                 raise EnclosureFullException(
-                    f"{self.name} is full (Capacity {self.size}). Cannot add {animal.name}."
+                    f"{self.name} is full (Capacity {self.size}). Cannot add {animal.name}\n."
                 )
 
             # And returning a value of this being false.
@@ -176,7 +176,7 @@ class Enclosure(ABC):
         self.animal_enclosures.append(animal_enclosure_record)
         # Then it will print an output
         print(
-            f"The Enclosure is {self.name}, it has added {animal_enclosure_record} \nEnclosure {self.name} record: {self.animal_enclosures}")
+            f"The Enclosure is {self.name}, it has added {animal_enclosure_record} \nEnclosure {self.name} record: {self.animal_enclosures}\n")
         # An increase the id to each animal in the enclosure so each animal in the enclosure has a different id
         self.animal_enclosure_id += 1
 
@@ -191,11 +191,14 @@ class Enclosure(ABC):
                    # It wil remove the specific enclosure desired
                    self.animal_enclosures.remove(enclosure_record)
                    # And print an output.
-                   print(f"Removed {enclosure_record} \nUpdated list: {self.animal_enclosures}")
+                   if not self.animal_enclosures:
+                      print(f"The Enclosure {self.name}, has no animals in the enclosure.")
+                   else:
+                      print(f"Removed {enclosure_record} \nUpdated list: {self.animal_enclosures}\n")
                    return self.animal_enclosures
 
         # If the id is not in the list of animals in the enclosure it will post this.
-            raise IDEnclosureException(f"Enclosure record with ID: {id} does not exist.")
+            raise IDEnclosureException(f"Enclosure record with ID: {id} does not exist.\n")
 
         except IDEnclosureException as e:
             print(e)
@@ -227,7 +230,7 @@ class Enclosure(ABC):
         pass
 
     def __str__(self):
-        return f"{self.name}, {self.size}, {self.environmental_type}, {self.cleanliness}"
+        return f"{self.name}, {self.size}, {self.environmental_type}, {self.cleanliness}\n"
 
 
 class Aquatic(Enclosure):
@@ -237,7 +240,7 @@ class Aquatic(Enclosure):
     # Using the abstract method above this will generate a report showing the id of the enclosure, the name of the enclosure
     # the size of the enclosure, the environmental type of the enclosure and the cleanliness of the enclosure
     def generate_report(self):
-        enclosure_record = (f"ID: {self.id}, "
+        enclosure_record = (f"Enclosure ID: {self.id}, "
                             f"Name: {self.name}, "
                             f"Size: {self.size}, "
                             f"Environmental Type: {self.environmental_type}, "
@@ -245,7 +248,7 @@ class Aquatic(Enclosure):
         # This will append it to the total records so all enclosures can be shown at once
         self.total_records.append(enclosure_record)
         # Then it will print an output
-        print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}")
+        print(f"Added {enclosure_record} \nEnclosure record: {self.total_records}\n")
         return enclosure_record
 
 

@@ -84,14 +84,14 @@ class Staff(ABC):
     def staff_assign_enclosure(self, enclosure: Enclosure):
         # Using the staff enclosure record method it will assign, the enclosure staff_id, the enclosures name,
         # the enclosures age, the enclosures role and the enclosures responsibilities to the method
-        staff_enclosure_record = enclosure.staff_id, self.name, self.age, self.role, self.responsibilities
+        staff_enclosure_record = f"Staff ID: {enclosure.staff_id}, Name: {self.name}, Age: {self.age}, Role: {self.role}, Responsibilities: {self.responsibilities}"
 
         # Then it will append the method above to the enclosures animal_enclosure list
         enclosure.animal_enclosures.append(staff_enclosure_record)
 
         # Then it will print the output below.
         print(
-            f"The Enclosure is {enclosure.name}, it has added {staff_enclosure_record} \nEnclosure {enclosure.name} record: {enclosure.animal_enclosures}")
+            f"The Enclosure is {enclosure.name}, it has added {staff_enclosure_record} \nEnclosure {enclosure.name} record: {enclosure.animal_enclosures}\n")
 
         # Then it will increase the staff id so each staff will have a different id
         self.staff_id += 1
@@ -115,16 +115,19 @@ class Zookeeper(Staff):
         try:
             if animals.feed is False:
                 # Printing an output
-                print(f"{animals.name} has been feed")
+                print(f"{animals.name} has been feed\n")
                 # Changing the value to true
                 animals.feed = True
 
             #If it has already been fed it will produce this output
             else:
-                raise AnimalFullException(f"{animals.name} has already been feed")
+                raise AnimalFullException(f"{animals.name} has already been feed\n")
         except AnimalFullException as e:
             print(e)
-            return f"The animal {animals.name} fed level is {animals.feed}"
+            if animals.feed is False:
+               return f"The animal {animals.name} hasn't been feed.\n"
+            else:
+                return f"The animal {animals.name} has been feed.\n"
 
     # This will check if the enclosure has been cleaned using the enclosure: Enclosure method
     # if the enclosure cleanliness is False it will produce an output and change the enclosure cleanliness
@@ -134,13 +137,13 @@ class Zookeeper(Staff):
         try:
             if enclosure.cleanliness is False:
                 # Printing an output
-                print(f"The {enclosure.name} has been cleaned")
+                print(f"The Enclosure ({enclosure.name}) has been cleaned\n")
                 # Changing the enclosure cleanliness to true
                 enclosure.cleanliness = True
 
                 # If it's already cleaned it will print an output saying it's already been cleaned
             else:
-                raise EnclosureCleanedException(f"The {enclosure.name} has already been cleaned")
+                raise EnclosureCleanedException(f"The Enclosure ({enclosure.name}) has already been cleaned\n")
 
         except EnclosureCleanedException as e:
             print(e)
@@ -155,7 +158,7 @@ class Zookeeper(Staff):
 
         # Then it will append it to a self version of the health record
         self.health_record.append(health_record)
-        print(f"Added {health_record} \nHealth_record: {self.health_record}")
+        print(f"Added {health_record} \nHealth_record: {self.health_record}\n")
 
         # It will increase the id so each record will have a different id.
         self.id += 1
@@ -172,7 +175,7 @@ class Zookeeper(Staff):
                 # Then it will remove said record
                    self.health_record.remove(record)
                    # And print an output because of it
-                   print(f"Removed {record} \nUpdated list: {self.health_record}")
+                   print(f"Removed {record} \nUpdated list: {self.health_record}\n")
 
                    # Then returning the updated health records
                    return self.health_record
@@ -208,7 +211,7 @@ class Veterinarian(Staff):
                 # Then it will set the animals health to False because it has some kind of injury
                    animal.health = False
                 # Then printing an output to match the method above
-                   print(f"{animal.name} {animal.health}")
+                   print(f"The animal {animal.name} is currently injured and needs to be treated.\n")
                    return animal.health
 
             # Otherwise if the animal isn't injured in some way it will return the animals health to true
@@ -216,7 +219,7 @@ class Veterinarian(Staff):
                 # Setting the animals health here
                      animal.health = True
                 # And printing an output here
-                     print(f"{animal.name} {animal.health}")
+                     print(f"{animal.name} is healthy and doesn't need to be treated.\n")
                      return animal.health
 
             # Otherwise if the severity in this function isn't one of the values mentioned above it will tell the user to input

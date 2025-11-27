@@ -8,11 +8,11 @@ This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod
 
-from exception import AnimalFullException
+from exception import AnimalTreatmentException
 
 
 class Animal(ABC):
-    def __init__(self, name, species, age, dietary, feed=False, health=False):
+    def __init__(self, name, species, age, dietary, feed=False, health=True):
         self.__name = name
         self.__species = species
         self.__age = age
@@ -116,18 +116,22 @@ class Animal(ABC):
         # Then it will append all that into another list so it can be used for later
         self.animal_health.append(staff.animal_record)
         # Then it will print an output as so
-        print(f"Added {staff.animal_record} \n Staff record: {self.animal_health}")
+        print(f"Added {staff.animal_record} \nStaff record: {self.animal_health}")
         # To have each animal_report accessible this is incremented when used by 1.
         self.animal_id += 1
-        return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}"
+        return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}\n"
 
     # This will check if the animal is being treated because if the self.health method is equal to false it will
     # return the function as true otherwise it will return as false.
     def animal_treatment(self):
-        if not self.health:
-           print("This animal can't be moved since it's being treated")
-           return True
-        return False
+        try:
+            if not self.health:
+               raise AnimalTreatmentException(f"This animal {self.name} can't be moved since it's being treated {self.health}\n"
+                                              )
+            return False
+        except AnimalTreatmentException as e:
+               print(e)
+               return True
 
     # This is an abstract method (speak) and will be passed on to the children class
     @abstractmethod
@@ -145,7 +149,7 @@ class Animal(ABC):
         pass
 
     def __str__(self):
-        return f"{self.name}, {self.species}, {self.age}, {self.dietary}, {self.feed}, {self.health} "
+        return f"{self.name}, {self.species}, {self.age}, {self.dietary}, {self.feed}, {self.health}\n"
 
 class Mammal(Animal):
     def __init__(self, name, species, age, dietary):
