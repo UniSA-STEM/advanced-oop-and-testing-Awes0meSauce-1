@@ -24,6 +24,8 @@ class Animal(ABC):
         self.__animal_id = 1
         self.__severity = None
         self.__notes = None
+        self.__behavioural_concerns = None
+        self.__date = None
 
     # Is the getter of method (self.__name)
     @property
@@ -105,18 +107,37 @@ class Animal(ABC):
     def notes(self, value):
         self.__notes = value
 
+    @property
+    def behavioural_concerns(self):
+        return self.__behavioural_concerns
+
+    @behavioural_concerns.setter
+    def behavioural_concerns(self, value):
+        self.__behavioural_concerns = value
+
+    @property
+    def date(self):
+        return self.__date
+
+    @date.setter
+    def date(self, value):
+        self.__date = value
+
+
     # Importing the staff, severity notes behavioural concerns and date this will allow this function to generate a report
     # of the animals_total_health.
     def animal_total_health(self, staff, severity, notes, behavioural_concerns, date):
         # This allows severity and notes to be passed on the report without having being repeated in the report function
         self.severity = severity
         self.notes = notes
+        self.behavioural_concerns = behavioural_concerns
+        self.date = date
         # This allows to store the animal_id of the animal the severity, notes, behavioural_concerns and the date
         staff.animal_record = [self.animal_id, self.severity, self.notes, behavioural_concerns, date]
         # Then it will append all that into another list so it can be used for later
         self.animal_health.append(staff.animal_record)
         # Then it will print an output as so
-        print(f"Added {staff.animal_record} \nStaff record: {self.animal_health}")
+        # print(f"Added {staff.animal_record} \nStaff record: {self.animal_health}")
         # To have each animal_report accessible this is incremented when used by 1.
         self.animal_id += 1
         return f"The severity is {severity}, the notes are {notes}, the behavioural_concerns are {behavioural_concerns}, the date is {date}\n"
