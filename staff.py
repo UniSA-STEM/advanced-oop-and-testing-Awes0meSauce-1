@@ -23,6 +23,8 @@ class Staff(ABC):
         self.__health_record = []
         self.__id = 1
         self.__staff_id = 1
+        self.__notified = None
+        self.__treatment_plan = None
 
     # Is the getter of the method (name)
     @property
@@ -78,6 +80,22 @@ class Staff(ABC):
     @staff_id.setter
     def staff_id(self, value):
         self.__staff_id = value
+
+    @property
+    def notified(self):
+        return self.__notified
+
+    @notified.setter
+    def notified(self, value):
+        self.__notified = value
+
+    @property
+    def treatment_plan(self):
+        return self.__treatment_plan
+
+    @treatment_plan.setter
+    def treatment_plan(self, value):
+        self.__treatment_plan = value
 
         # This function will assign a staff member to an enclosure of the desired type using the (enclosure: Enclosure) method
 
@@ -151,6 +169,9 @@ class Zookeeper(Staff):
     # This will add a health record checking what animal it is using the animal: Animal method, checking if it's notified
     # using the notified method and check what treatment_plan the animal has or hasn't been applied to the animal.
     def add_health_record(self, animal: Animal, notified, treatment_plan):
+
+        self.notified = notified
+        self.treatment_plan = treatment_plan
 
         # This will assign the severity of the animal, the notes of the animal if it's been notified and the
         # treatment plan to the method (health_record)
