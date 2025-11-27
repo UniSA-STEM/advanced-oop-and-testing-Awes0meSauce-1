@@ -1,9 +1,11 @@
 """
-File: filename.py
-Description: A brief description of this Python module.
-Author: Billy Bizilis
-ID: 110100110
-Username: bizvy001
+File: animal.py
+Description: This class holds all the animals it has the animal as the parent class and the mammal, bird and reptile
+as the child class this file allows the user to write a report about an animal check if the animal can be moved
+or not and do some instantiation.
+Author: Jack Gallagher
+ID: 110410979
+Username: galjh002
 This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod

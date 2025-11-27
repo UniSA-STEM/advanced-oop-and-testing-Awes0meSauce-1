@@ -1,9 +1,11 @@
 """
-File: filename.py
-Description: A brief description of this Python module.
-Author: Billy Bizilis
-ID: 110100110
-Username: bizvy001
+File: enclosure.py
+Description: This file holds all the enclosures with the enclosure being the parent class and aquatic and
+savannah being the children classes this class allows to check the size of the enclosure compared to the max,
+check the type of species in the enclosure, and you can add remove, move animals from enclosures.
+Author: Jack Gallagher
+ID: 110410979
+Username: galjh002
 This is my own work as defined by the University's Academic Integrity Policy.
 """
 from abc import ABC, abstractmethod

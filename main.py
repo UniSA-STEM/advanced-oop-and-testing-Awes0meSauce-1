@@ -1,9 +1,10 @@
 """
-File: filename.py
-Description: A brief description of this Python module.
-Author: Billy Bizilis
-ID: 110100110
-Username: bizvy001
+File: main.py
+Description: This is the main file where all the main commands are run, this file will do most of the calling
+as none of the other files would work without it.
+Author: Jack Gallagher
+ID: 110410979
+Username: galjh002
 This is my own work as defined by the University's Academic Integrity Policy.
 """
 

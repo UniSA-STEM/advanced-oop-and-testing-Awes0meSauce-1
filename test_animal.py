@@ -1,3 +1,12 @@
+"""
+File: test_animal.py
+Description: This tests the animal.py class this has 6 different tests ranging from test_animal_1 to test_animal_6.
+Author: Jack Gallagher
+ID: 110410979
+Username: galjh002
+This is my own work as defined by the University's Academic Integrity Policy.
+"""
+
 import pytest
 
 from animal import Animal, Mammal, Reptile, Birds

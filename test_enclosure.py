@@ -1,3 +1,13 @@
+"""
+File: test_enclosure.py
+Description: Tests the enclosure.py class, with tests such as "test enclosure type", "test enclosure size", and "test generate report".
+Author: Jack Gallagher
+Author: Jack Gallagher
+ID: 110410979
+Username: galjh002
+This is my own work as defined by the University's Academic Integrity Policy.
+"""
+
 import pytest
 
 from enclosure import Enclosure, Aquatic

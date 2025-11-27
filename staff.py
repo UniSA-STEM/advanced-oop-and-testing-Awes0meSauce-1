@@ -1,11 +1,14 @@
 """
-File: filename.py
-Description: A brief description of this Python module.
-Author: Billy Bizilis
-ID: 110100110
+File: staff.py
+Description: The file holds add the staff members having the staff as the parent class and the zookeeper
+and the Veterinarian as the children class this allows staff to assign themselves to enclosures, feed animals,
+clean enclosures add health records and do health checks.
+Author: Jack Gallagher
+ID: 110410979
 Username: bizvy001
 This is my own work as defined by the University's Academic Integrity Policy.
 """
+
 from abc import ABC, abstractmethod
 from animal import Animal
 from enclosure import Enclosure

@@ -1,3 +1,13 @@
+"""
+File: test_staff.py
+Description: The file shows the tests of the staff.py class with tests including
+             "test_feed_animal", "test_clean_enclosure" and "test add record"
+Author: Jack Gallagher
+ID: 110410979
+Username: galjh002
+This is my own work as defined by the University's Academic Integrity Policy.
+"""
+
 import pytest
 
 from animal import Mammal
